@@ -129,7 +129,7 @@ export default function DashboardPage() {
   })
 
   // Password - you can change this!
-  const DASHBOARD_PASSWORD = "202025" // Change this to your preferred password
+  const DASHBOARD_PASSWORD = "1818" // Change this to your preferred password
 
   // Check if already authenticated
   useEffect(() => {
@@ -871,27 +871,27 @@ export default function DashboardPage() {
 
   if (!isAuthenticated) {
     return (
-      <div className="min-h-screen bg-[#3D5033] flex items-center justify-center p-4">
+      <div className="min-h-screen bg-[#001B46] flex items-center justify-center p-4">
         <div className="w-full max-w-md">
-          <div className="bg-[#F0F0EE] rounded-3xl p-8 shadow-2xl border-2 border-[#E0CFB5]/50">
+          <div className="bg-white rounded-3xl p-8 shadow-2xl border-2 border-[#006495]/20">
             <div className="text-center mb-8">
-              <div className="inline-flex items-center justify-center w-20 h-20 bg-[#2F3724] rounded-full mb-3 shadow-lg">
-                <Lock className="h-10 w-10 text-[#E0CFB5]" />
+              <div className="inline-flex items-center justify-center w-20 h-20 bg-[#006495] rounded-full mb-3 shadow-lg">
+                <Lock className="h-10 w-10 text-white" />
               </div>
-              <div className="text-xs tracking-[0.2em] uppercase font-semibold text-[#909E8D] mb-2">
-                welcome Marzan and Nica
+              <div className="text-xs tracking-[0.2em] uppercase font-semibold text-[#8BB8E3] mb-2">
+                welcome Marielle
 </div>
-              <h1 className="text-3xl font-serif font-bold text-[#2F3724] mb-2">
+              <h1 className="text-3xl font-serif font-bold text-[#001B46] mb-2">
                 Wedding Dashboard
               </h1>
-              <p className="text-[#2F3724]/70 font-sans">
+              <p className="text-[#001B46]/70 font-sans">
                 Enter password to access
               </p>
             </div>
 
             <form onSubmit={handleLogin} className="space-y-4">
               <div>
-                <label className="block text-sm font-medium text-[#2F3724] mb-2 font-sans">
+                <label className="block text-sm font-medium text-[#001B46] mb-2 font-sans">
                   Password
                 </label>
                 <input
@@ -899,21 +899,21 @@ export default function DashboardPage() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="Enter dashboard password"
-                  className="w-full px-4 py-3 border-2 border-[#E0CFB5]/40 focus:border-[#D1AB6D] rounded-xl font-sans text-black placeholder:text-[#2F3724]/40 transition-all duration-300 focus:ring-4 focus:ring-[#D1AB6D]/20 bg-white"
+                  className="w-full px-4 py-3 border-2 border-[#006495]/20 focus:border-[#006495] rounded-xl font-sans text-black placeholder:text-[#001B46]/40 transition-all duration-300 focus:ring-4 focus:ring-[#006495]/20 bg-white"
                   autoFocus
                 />
               </div>
 
               {error && (
-                <div className="bg-[#D1AB6D]/15 border-2 border-[#D1AB6D]/60 rounded-xl p-3 flex items-center gap-2">
-                  <AlertCircle className="h-5 w-5 text-[#2F3724]" />
-                  <span className="text-[#2F3724] font-semibold text-sm">{error}</span>
+                <div className="bg-[#006495]/10 border-2 border-[#006495]/40 rounded-xl p-3 flex items-center gap-2">
+                  <AlertCircle className="h-5 w-5 text-[#001B46]" />
+                  <span className="text-[#001B46] font-semibold text-sm">{error}</span>
                 </div>
               )}
 
               <Button
                 type="submit"
-                className="w-full bg-[#909E8D] hover:bg-[#A5B4A3] text-black py-3 rounded-xl font-semibold transition-colors border border-[#F0F0EE]/60 shadow-md"
+                className="w-full bg-[#006495] hover:bg-[#00527A] text-white py-3 rounded-xl font-semibold transition-colors border border-[#006495]/40 shadow-md"
               >
                 Access Dashboard
               </Button>
@@ -925,9 +925,9 @@ export default function DashboardPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#3D5033]">
+    <div className="min-h-screen bg-[#001B46]">
       {/* Header */}
-      <div className="bg-gradient-to-r from-[#2F3724] via-[#3D5033] to-[#2F3724] shadow-xl border-b border-[#D1AB6D]/40">
+      <div className="bg-gradient-to-r from-[#001B46] via-[#006495] to-[#001B46] shadow-xl border-b border-[#006495]/40">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex items-center justify-between">
             <div>
@@ -945,7 +945,7 @@ export default function DashboardPage() {
                 disabled={isLoading}
                 size="sm"
                 variant="outline"
-                className="bg-[#909E8D] border-[#F0F0EE]/60 text-black hover:bg-[#A5B4A3]"
+                className="bg-[#001B46] border-[#001B46]/60 text-white hover:bg-[#001B46]"
               >
                 <RefreshCw className={`h-4 w-4 ${isLoading ? 'animate-spin' : ''}`} />
                 Refresh
@@ -954,7 +954,7 @@ export default function DashboardPage() {
                 onClick={handleLogout}
                 size="sm"
                 variant="outline"
-                className="bg-[#909E8D] border-[#F0F0EE]/60 text-black hover:bg-[#A5B4A3]"
+                className="bg-[#001B46] border-[#001B46]/60 text-white hover:bg-[#001B46]"
               >
                 <Lock className="h-4 w-4" />
                 Logout
@@ -967,73 +967,73 @@ export default function DashboardPage() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Stats Cards */}
         <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 mb-6">
-          <div className="bg-[#F0F0EE] rounded-2xl p-6 shadow-md border border-[#E0CFB5]/60">
+          <div className="bg-white rounded-2xl p-6 shadow-md border border-[#006495]/20">
             <div className="flex items-center justify-between mb-2">
-              <Users className="h-6 w-6 sm:h-8 sm:w-8 text-[#3D5033]" />
-              <span className="text-2xl sm:text-3xl font-bold text-[#2F3724]">{stats.totalGuests}</span>
+              <Users className="h-6 w-6 sm:h-8 sm:w-8 text-[#006495]" />
+              <span className="text-2xl sm:text-3xl font-bold text-[#001B46]">{stats.totalGuests}</span>
             </div>
-            <p className="text-xs sm:text-sm text-[#2F3724]/70 font-sans">Total Guests</p>
-            <p className="text-xs text-[#2F3724]/50 font-sans mt-1">{stats.total} entries</p>
+            <p className="text-xs sm:text-sm text-[#001B46]/70 font-sans">Total Guests</p>
+            <p className="text-xs text-[#001B46]/50 font-sans mt-1">{stats.total} entries</p>
           </div>
 
-          <div className="bg-[#F0F0EE] rounded-2xl p-6 shadow-md border border-[#E0CFB5]/60">
+          <div className="bg-white rounded-2xl p-6 shadow-md border border-[#006495]/20">
             <div className="flex items-center justify-between mb-2">
-              <CheckCircle className="h-6 w-6 sm:h-8 sm:w-8 text-[#3D5033]" />
-              <span className="text-2xl sm:text-3xl font-bold text-[#2F3724]">{stats.attending}</span>
+              <CheckCircle className="h-6 w-6 sm:h-8 sm:w-8 text-[#006495]" />
+              <span className="text-2xl sm:text-3xl font-bold text-[#001B46]">{stats.attending}</span>
             </div>
-            <p className="text-xs sm:text-sm text-[#2F3724]/70 font-sans">Attending</p>
+            <p className="text-xs sm:text-sm text-[#001B46]/70 font-sans">Attending</p>
           </div>
 
-          <div className="bg-[#F0F0EE] rounded-2xl p-6 shadow-md border border-[#E0CFB5]/60">
+          <div className="bg-white rounded-2xl p-6 shadow-md border border-[#006495]/20">
             <div className="flex items-center justify-between mb-2">
-              <XCircle className="h-6 w-6 sm:h-8 sm:w-8 text-[#909E8D]" />
-              <span className="text-2xl sm:text-3xl font-bold text-[#2F3724]">{stats.notAttending}</span>
+              <XCircle className="h-6 w-6 sm:h-8 sm:w-8 text-[#006495]" />
+              <span className="text-2xl sm:text-3xl font-bold text-[#001B46]">{stats.notAttending}</span>
             </div>
-            <p className="text-xs sm:text-sm text-[#2F3724]/70 font-sans">Not Attending</p>
+            <p className="text-xs sm:text-sm text-[#001B46]/70 font-sans">Not Attending</p>
           </div>
 
-          <div className="bg-[#F0F0EE] rounded-2xl p-6 shadow-md border border-[#E0CFB5]/60">
+          <div className="bg-white rounded-2xl p-6 shadow-md border border-[#006495]/20">
             <div className="flex items-center justify-between mb-2">
-              <AlertCircle className="h-6 w-6 sm:h-8 sm:w-8 text-[#D1AB6D]" />
-              <span className="text-2xl sm:text-3xl font-bold text-[#2F3724]">{stats.pending}</span>
+              <AlertCircle className="h-6 w-6 sm:h-8 sm:w-8 text-[#006495]" />
+              <span className="text-2xl sm:text-3xl font-bold text-[#001B46]">{stats.pending}</span>
             </div>
-            <p className="text-xs sm:text-sm text-[#2F3724]/70 font-sans">Pending</p>
+            <p className="text-xs sm:text-sm text-[#001B46]/70 font-sans">Pending</p>
           </div>
 
-          <div className="bg-[#F0F0EE] rounded-2xl p-6 shadow-md border border-[#E0CFB5]/60">
+          <div className="bg-white rounded-2xl p-6 shadow-md border border-[#006495]/20">
             <div className="flex items-center justify-between mb-2">
-              <Bell className="h-6 w-6 sm:h-8 sm:w-8 text-[#909E8D]" />
-              <span className="text-2xl sm:text-3xl font-bold text-[#2F3724]">{guestRequests.length}</span>
+              <Bell className="h-6 w-6 sm:h-8 sm:w-8 text-[#006495]" />
+              <span className="text-2xl sm:text-3xl font-bold text-[#001B46]">{guestRequests.length}</span>
             </div>
-            <p className="text-xs sm:text-sm text-[#2F3724]/70 font-sans">Requests</p>
+            <p className="text-xs sm:text-sm text-[#001B46]/70 font-sans">Requests</p>
           </div>
 
-          <div className="bg-[#F0F0EE] rounded-2xl p-6 shadow-md border border-[#E0CFB5]/60">
+          <div className="bg-white rounded-2xl p-6 shadow-md border border-[#006495]/20">
             <div className="flex items-center justify-between mb-2">
-              <Crown className="h-6 w-6 sm:h-8 sm:w-8 text-[#3D5033]" />
-              <span className="text-2xl sm:text-3xl font-bold text-[#2F3724]">{entourage.length}</span>
+              <Crown className="h-6 w-6 sm:h-8 sm:w-8 text-[#006495]" />
+              <span className="text-2xl sm:text-3xl font-bold text-[#001B46]">{entourage.length}</span>
             </div>
-            <p className="text-xs sm:text-sm text-[#2F3724]/70 font-sans">Entourage</p>
+            <p className="text-xs sm:text-sm text-[#001B46]/70 font-sans">Entourage</p>
           </div>
 
-          <div className="bg-[#F0F0EE] rounded-2xl p-6 shadow-md border border-[#E0CFB5]/60">
+          <div className="bg-white rounded-2xl p-6 shadow-md border border-[#006495]/20">
             <div className="flex items-center justify-between mb-2">
-              <UserPlus className="h-6 w-6 sm:h-8 sm:w-8 text-[#3D5033]" />
-              <span className="text-2xl sm:text-3xl font-bold text-[#2F3724]">{principalSponsors.length}</span>
+              <UserPlus className="h-6 w-6 sm:h-8 sm:w-8 text-[#006495]" />
+              <span className="text-2xl sm:text-3xl font-bold text-[#001B46]">{principalSponsors.length}</span>
             </div>
-            <p className="text-xs sm:text-sm text-[#2F3724]/70 font-sans">Principal Sponsors</p>
+            <p className="text-xs sm:text-sm text-[#001B46]/70 font-sans">Principal Sponsors</p>
           </div>
         </div>
 
         {/* Tabs */}
-        <div className="bg-[#F0F0EE] rounded-2xl p-1 sm:p-2 shadow-md border border-[#E0CFB5]/60 mb-6">
+        <div className="bg-white rounded-2xl p-1 sm:p-2 shadow-md border border-[#006495]/20 mb-6">
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-1 sm:gap-2">
             <button
               onClick={() => setActiveTab("guests")}
               className={`w-full px-3 py-2 sm:px-4 sm:py-3 rounded-lg sm:rounded-xl text-xs sm:text-sm font-semibold transition-all duration-300 flex items-center justify-center gap-1.5 sm:gap-2 ${
                 activeTab === "guests"
-                  ? "bg-[#3D5033] text-[#F0F0EE] shadow-lg"
-                  : "text-[#2F3724] hover:bg-[#E0CFB5]/30"
+                  ? "bg-[#006495] text-white shadow-lg"
+                  : "text-[#001B46] hover:bg-[#006495]/10"
               }`}
             >
               <Users className="h-4 w-4 sm:h-5 sm:w-5" />
@@ -1084,17 +1084,17 @@ export default function DashboardPage() {
         {activeTab === "guests" && (
           <>
         {/* Search and Add Guest */}
-        <div className="bg-[#F0F0EE] rounded-2xl p-6 shadow-md border border-[#E0CFB5]/60 mb-6">
+        <div className="bg-white rounded-2xl p-6 shadow-md border border-[#006495]/20 mb-6">
           <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between mb-4">
             <div className="flex-1 w-full">
               <div className="relative">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-[#2F3724]/40" />
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-[#001B46]/40" />
                 <input
                   type="text"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder="Search guests by name or email..."
-                  className="w-full pl-10 pr-4 py-2 border-2 border-[#E0CFB5]/50 focus:border-[#D1AB6D] rounded-xl font-sans text-black placeholder:text-[#2F3724]/40 transition-all duration-300 focus:ring-4 focus:ring-[#D1AB6D]/20 bg-white"
+                  className="w-full pl-10 pr-4 py-2 border-2 border-[#006495]/20 focus:border-[#006495] rounded-xl font-sans text-black placeholder:text-[#001B46]/40 transition-all duration-300 focus:ring-4 focus:ring-[#006495]/20 bg-white"
                 />
               </div>
             </div>
@@ -1105,7 +1105,7 @@ export default function DashboardPage() {
                 setEditModalOpen(false)
                 setFormData({ Name: "", Email: "", RSVP: "", Guest: "", Message: "" })
               }}
-              className="bg-[#909E8D] hover:bg-[#A5B4A3] text-black transition-colors border border-[#F0F0EE]/60"
+              className="bg-[#006495] hover:bg-[#00527A] text-white transition-colors border border-[#006495]/40"
             >
               <Plus className="h-4 w-4 mr-2" />
               Add Guest
@@ -1114,44 +1114,44 @@ export default function DashboardPage() {
 
           {/* Success/Error Messages */}
           {successMessage && (
-            <div className="bg-[#D1AB6D]/15 border-2 border-[#D1AB6D]/60 rounded-xl p-3 mb-4 flex items-center gap-2">
-              <CheckCircle className="h-5 w-5 text-[#3D5033]" />
-              <span className="text-[#2F3724] font-semibold text-sm">{successMessage}</span>
+            <div className="bg-[#006495]/10 border-2 border-[#006495]/40 rounded-xl p-3 mb-4 flex items-center gap-2">
+              <CheckCircle className="h-5 w-5 text-[#006495]" />
+              <span className="text-[#001B46] font-semibold text-sm">{successMessage}</span>
             </div>
           )}
 
           {error && (
-            <div className="bg-[#D1AB6D]/15 border-2 border-[#D1AB6D]/60 rounded-xl p-3 mb-4 flex items-center gap-2">
-              <AlertCircle className="h-5 w-5 text-[#3D5033]" />
-              <span className="text-[#2F3724] font-semibold text-sm">{error}</span>
+            <div className="bg-[#006495]/10 border-2 border-[#006495]/40 rounded-xl p-3 mb-4 flex items-center gap-2">
+              <AlertCircle className="h-5 w-5 text-[#006495]" />
+              <span className="text-[#001B46] font-semibold text-sm">{error}</span>
             </div>
           )}
 
         </div>
 
         {/* Guest List */}
-        <div className="bg-[#F0F0EE] rounded-2xl shadow-md border border-[#E0CFB5]/60 overflow-hidden">
+        <div className="bg-white rounded-2xl shadow-md border border-[#006495]/20 overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full">
-              <thead className="bg-[#E0CFB5]/60">
+              <thead className="bg-[#E6F3FF]">
                 <tr>
-                  <th className="text-left px-6 py-4 text-sm font-bold text-[#2F3724] font-sans">Name</th>
-                  <th className="text-left px-6 py-4 text-sm font-bold text-[#2F3724] font-sans">Email</th>
-                  <th className="text-center px-6 py-4 text-sm font-bold text-[#2F3724] font-sans">RSVP</th>
-                  <th className="text-center px-6 py-4 text-sm font-bold text-[#2F3724] font-sans whitespace-nowrap">
+                  <th className="text-left px-6 py-4 text-sm font-bold text-[#001B46] font-sans">Name</th>
+                  <th className="text-left px-6 py-4 text-sm font-bold text-[#001B46] font-sans">Email</th>
+                  <th className="text-center px-6 py-4 text-sm font-bold text-[#001B46] font-sans">RSVP</th>
+                  <th className="text-center px-6 py-4 text-sm font-bold text-[#001B46] font-sans whitespace-nowrap">
                     <span className="flex items-center justify-center gap-1">
                       <Users className="h-4 w-4" />
                       Guests
                     </span>
                   </th>
-                  <th className="text-left px-6 py-4 text-sm font-bold text-[#2F3724] font-sans">Message</th>
-                  <th className="text-center px-6 py-4 text-sm font-bold text-[#2F3724] font-sans">Actions</th>
+                  <th className="text-left px-6 py-4 text-sm font-bold text-[#001B46] font-sans">Message</th>
+                  <th className="text-center px-6 py-4 text-sm font-bold text-[#001B46] font-sans">Actions</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-[#E0CFB5]/40">
+              <tbody className="divide-y divide-[#006495]/10">
                 {filteredGuests.length === 0 ? (
                   <tr>
-                    <td colSpan={6} className="px-6 py-12 text-center text-[#2F3724]/60 font-sans">
+                    <td colSpan={6} className="px-6 py-12 text-center text-[#001B46]/60 font-sans">
                       {isLoading ? (
                         <div className="flex items-center justify-center gap-2">
                           <RefreshCw className="h-5 w-5 animate-spin" />
@@ -1164,26 +1164,26 @@ export default function DashboardPage() {
                   </tr>
                 ) : (
                   filteredGuests.map((guest, index) => (
-                    <tr key={index} className="hover:bg-[#E0CFB5]/20 transition-colors bg-[#FDF7EF]">
-                      <td className="px-6 py-4 font-medium text-[#2F3724] font-sans">{guest.Name}</td>
-                      <td className="px-6 py-4 text-[#2F3724]/70 font-sans">
+                    <tr key={index} className="hover:bg-[#E6F3FF] transition-colors bg-[#F7FBFF]">
+                      <td className="px-6 py-4 font-medium text-[#001B46] font-sans">{guest.Name}</td>
+                      <td className="px-6 py-4 text-[#001B46]/70 font-sans">
                         {guest.Email && guest.Email !== "Pending" ? guest.Email : "-"}
                       </td>
                       <td className="px-6 py-4 text-center">
                         {guest.RSVP === "Yes" && (
-                          <span className="inline-flex items-center gap-1 px-3 py-1 bg-[#C2D3C3]/40 text-[#1F2418] rounded-full text-sm font-semibold border border-[#909E8D]/70">
+                          <span className="inline-flex items-center gap-1 px-3 py-1 bg-[#D3E9F8] text-[#001B46] rounded-full text-sm font-semibold border border-[#006495]/40">
                             <CheckCircle className="h-4 w-4" />
                             Attending
                           </span>
                         )}
                         {guest.RSVP === "No" && (
-                          <span className="inline-flex items-center gap-1 px-3 py-1 bg-[#F2D1C8]/60 text-[#3D2A25] rounded-full text-sm font-semibold border border-[#DBA490]/70">
+                          <span className="inline-flex items-center gap-1 px-3 py-1 bg-[#F4C7C3]/70 text-[#4B1D1B] rounded-full text-sm font-semibold border border-[#E08F86]/70">
                             <XCircle className="h-4 w-4" />
                             Not Attending
                           </span>
                         )}
                         {guest.RSVP === "Maybe" && (
-                          <span className="inline-flex items-center gap-1 px-3 py-1 bg-[#EDD6AC]/60 text-[#2F3724] rounded-full text-sm font-semibold border border-[#D1AB6D]/80">
+                          <span className="inline-flex items-center gap-1 px-3 py-1 bg-[#FFE7B3]/70 text-[#001B46] rounded-full text-sm font-semibold border border-[#F4C979]/80">
                             <AlertCircle className="h-4 w-4" />
                             Maybe
                           </span>
@@ -1201,14 +1201,14 @@ export default function DashboardPage() {
                             : 1}
                         </span>
                       </td>
-                      <td className="px-6 py-4 text-[#2F3724]/70 font-sans max-w-xs truncate" title={guest.Message || ""}>
+                      <td className="px-6 py-4 text-[#001B46]/70 font-sans max-w-xs truncate" title={guest.Message || ""}>
                         {guest.Message || "-"}
                       </td>
                       <td className="px-6 py-4 text-center">
                         <div className="flex items-center justify-center gap-2">
                           <button
                             onClick={() => handleEditClick(guest)}
-                            className="p-2 text-[#3D5033] hover:bg-[#E0CFB5]/30 rounded-lg transition-colors"
+                            className="p-2 text-[#006495] hover:bg-[#006495]/10 rounded-lg transition-colors"
                             title="Edit guest"
                           >
                             <Edit2 className="h-4 w-4" />
@@ -1241,17 +1241,17 @@ export default function DashboardPage() {
         {activeTab === "requests" && (
           <>
             {/* Search Section */}
-            <div className="bg-[#F0F0EE] rounded-2xl p-6 shadow-md border border-[#E0CFB5]/60 mb-6">
+            <div className="bg-white rounded-2xl p-6 shadow-md border border-[#006495]/20 mb-6">
               <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between mb-4">
                 <div className="flex-1 w-full">
                   <div className="relative">
-                    <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-[#2F3724]/40" />
+                    <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-[#001B46]/40" />
                     <input
                       type="text"
                       value={searchRequestQuery}
                       onChange={(e) => setSearchRequestQuery(e.target.value)}
                       placeholder="Search requests by name or email..."
-                      className="w-full pl-10 pr-4 py-2 border-2 border-[#E0CFB5]/50 focus:border-[#D1AB6D] rounded-xl font-sans text-black placeholder:text-[#2F3724]/40 transition-all duration-300 focus:ring-4 focus:ring-[#D1AB6D]/20 bg-white"
+                      className="w-full pl-10 pr-4 py-2 border-2 border-[#006495]/20 focus:border-[#006495] rounded-xl font-sans text-black placeholder:text-[#001B46]/40 transition-all duration-300 focus:ring-4 focus:ring-[#006495]/20 bg-white"
                     />
                   </div>
                 </div>
@@ -1259,44 +1259,44 @@ export default function DashboardPage() {
 
               {/* Success/Error Messages */}
               {successMessage && (
-                <div className="bg-[#D1AB6D]/15 border-2 border-[#D1AB6D]/60 rounded-xl p-3 mb-4 flex items-center gap-2">
-                  <CheckCircle className="h-5 w-5 text-[#3D5033]" />
-                  <span className="text-[#2F3724] font-semibold text-sm">{successMessage}</span>
+                <div className="bg-[#006495]/10 border-2 border-[#006495]/40 rounded-xl p-3 mb-4 flex items-center gap-2">
+                  <CheckCircle className="h-5 w-5 text-[#006495]" />
+                  <span className="text-[#001B46] font-semibold text-sm">{successMessage}</span>
                 </div>
               )}
 
               {error && (
-                <div className="bg-[#D1AB6D]/15 border-2 border-[#D1AB6D]/60 rounded-xl p-3 mb-4 flex items-center gap-2">
-                  <AlertCircle className="h-5 w-5 text-[#3D5033]" />
-                  <span className="text-[#2F3724] font-semibold text-sm">{error}</span>
+                <div className="bg-[#006495]/10 border-2 border-[#006495]/40 rounded-xl p-3 mb-4 flex items-center gap-2">
+                  <AlertCircle className="h-5 w-5 text-[#006495]" />
+                  <span className="text-[#001B46] font-semibold text-sm">{error}</span>
                 </div>
               )}
 
             </div>
 
             {/* Requests List */}
-            <div className="bg-[#F0F0EE] rounded-2xl shadow-md border border-[#E0CFB5]/60 overflow-hidden">
+            <div className="bg-white rounded-2xl shadow-md border border-[#006495]/20 overflow-hidden">
               <div className="overflow-x-auto">
                 <table className="w-full">
-                  <thead className="bg-[#E0CFB5]/60">
+                  <thead className="bg-[#E6F3FF]">
                     <tr>
-                      <th className="text-left px-6 py-4 text-sm font-bold text-[#2F3724] font-sans">Name</th>
-                      <th className="text-left px-6 py-4 text-sm font-bold text-[#2F3724] font-sans">Email</th>
-                      <th className="text-left px-6 py-4 text-sm font-bold text-[#2F3724] font-sans">Phone</th>
-                      <th className="text-center px-6 py-4 text-sm font-bold text-[#2F3724] font-sans whitespace-nowrap">
+                      <th className="text-left px-6 py-4 text-sm font-bold text-[#001B46] font-sans">Name</th>
+                      <th className="text-left px-6 py-4 text-sm font-bold text-[#001B46] font-sans">Email</th>
+                      <th className="text-left px-6 py-4 text-sm font-bold text-[#001B46] font-sans">Phone</th>
+                      <th className="text-center px-6 py-4 text-sm font-bold text-[#001B46] font-sans whitespace-nowrap">
                         <span className="flex items-center justify-center gap-1">
                           <Users className="h-4 w-4" />
                           Guests
                         </span>
                       </th>
-                      <th className="text-left px-6 py-4 text-sm font-bold text-[#2F3724] font-sans">Message</th>
-                      <th className="text-center px-6 py-4 text-sm font-bold text-[#2F3724] font-sans">Actions</th>
+                      <th className="text-left px-6 py-4 text-sm font-bold text-[#001B46] font-sans">Message</th>
+                      <th className="text-center px-6 py-4 text-sm font-bold text-[#001B46] font-sans">Actions</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-[#E0CFB5]/40">
+                  <tbody className="divide-y divide-[#006495]/10">
                     {filteredRequests.length === 0 ? (
                       <tr>
-                        <td colSpan={6} className="px-6 py-12 text-center text-[#2F3724]/60 font-sans">
+                        <td colSpan={6} className="px-6 py-12 text-center text-[#001B46]/60 font-sans">
                           {isLoading ? (
                             <div className="flex items-center justify-center gap-2">
                               <RefreshCw className="h-5 w-5 animate-spin" />
@@ -1309,29 +1309,29 @@ export default function DashboardPage() {
                       </tr>
                     ) : (
                       filteredRequests.map((request, index) => (
-                        <tr key={index} className="hover:bg-[#E0CFB5]/20 transition-colors bg-[#FDF7EF]">
-                          <td className="px-6 py-4 font-medium text-[#2F3724] font-sans">{request.Name}</td>
-                          <td className="px-6 py-4 text-[#2F3724]/70 font-sans">
+                        <tr key={index} className="hover:bg-[#E6F3FF] transition-colors bg-[#F7FBFF]">
+                          <td className="px-6 py-4 font-medium text-[#001B46] font-sans">{request.Name}</td>
+                          <td className="px-6 py-4 text-[#001B46]/70 font-sans">
                             {request.Email && request.Email !== "Pending" ? request.Email : "-"}
                           </td>
-                          <td className="px-6 py-4 text-[#2F3724]/70 font-sans">
+                          <td className="px-6 py-4 text-[#001B46]/70 font-sans">
                             {request.Phone || "-"}
                           </td>
                           <td className="px-6 py-4 text-center">
-                            <span className="inline-flex items-center justify-center px-3 py-1.5 bg-[#E0CFB5]/70 text-[#2F3724] rounded-full text-sm font-bold min-w-[3.5rem] border border-[#D1AB6D]/70">
+                            <span className="inline-flex items-center justify-center px-3 py-1.5 bg-[#E6F3FF] text-[#001B46] rounded-full text-sm font-bold min-w-[3.5rem] border border-[#006495]/40">
                               {request?.Guest !== undefined && request?.Guest !== null && request?.Guest !== '' 
                                 ? (parseInt(String(request.Guest)) || 1) 
                                 : 1}
                             </span>
                           </td>
-                          <td className="px-6 py-4 text-[#2F3724]/70 font-sans max-w-xs truncate">
+                          <td className="px-6 py-4 text-[#001B46]/70 font-sans max-w-xs truncate">
                             {request.Message || "-"}
                           </td>
                           <td className="px-6 py-4 text-center">
                             <div className="flex items-center justify-center gap-2">
                               <button
                                 onClick={() => handleAddRequestToGuestListClick(request)}
-                                className="px-4 py-2 bg-[#909E8D] hover:bg-[#A5B4A3] text-black rounded-lg transition-colors font-semibold text-sm flex items-center gap-2 shadow-md hover:shadow-lg border border-[#F0F0EE]/60"
+                                className="px-4 py-2 bg-[#006495] hover:bg-[#00527A] text-white rounded-lg transition-colors font-semibold text-sm flex items-center gap-2 shadow-md hover:shadow-lg border border-[#006495]/40"
                                 title="Add to guest list"
                               >
                                 <UserCheck className="h-4 w-4" />
@@ -1365,17 +1365,17 @@ export default function DashboardPage() {
         {activeTab === "entourage" && (
           <>
             {/* Search Section */}
-            <div className="bg-[#F0F0EE] rounded-2xl p-6 shadow-md border border-[#E0CFB5]/60 mb-6">
+            <div className="bg-white rounded-2xl p-6 shadow-md border border-[#006495]/20 mb-6">
               <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between mb-4">
                 <div className="flex-1 w-full">
                   <div className="relative">
-                    <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-[#2F3724]/40" />
+                    <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-[#001B46]/40" />
                     <input
                       type="text"
                       value={searchEntourageQuery}
                       onChange={(e) => setSearchEntourageQuery(e.target.value)}
                       placeholder="Search entourage by name, role, or email..."
-                      className="w-full pl-10 pr-4 py-2 border-2 border-[#E0CFB5]/50 focus:border-[#D1AB6D] rounded-xl font-sans text-black placeholder:text-[#2F3724]/40 transition-all duration-300 focus:ring-4 focus:ring-[#D1AB6D]/20 bg-white"
+                      className="w-full pl-10 pr-4 py-2 border-2 border-[#006495]/20 focus:border-[#006495] rounded-xl font-sans text-black placeholder:text-[#001B46]/40 transition-all duration-300 focus:ring-4 focus:ring-[#006495]/20 bg-white"
                     />
                   </div>
                 </div>
@@ -1386,7 +1386,7 @@ export default function DashboardPage() {
                     setEntourageFormData({ Name: "", RoleCategory: "", RoleTitle: "", Email: "" })
                     setShowEntourageModal(true)
                   }}
-                className="bg-[#909E8D] hover:bg-[#A5B4A3] text-black transition-colors border border-[#F0F0EE]/60"
+                className="bg-[#006495] hover:bg-[#00527A] text-white transition-colors border border-[#006495]/40"
                 >
                   <Plus className="h-4 w-4 mr-2" />
                   Add Member
@@ -1395,16 +1395,16 @@ export default function DashboardPage() {
 
               {/* Success/Error Messages */}
               {successMessage && (
-                <div className="bg-[#D1AB6D]/15 border-2 border-[#D1AB6D]/60 rounded-xl p-3 mb-4 flex items-center gap-2">
-                  <CheckCircle className="h-5 w-5 text-[#3D5033]" />
-                  <span className="text-[#2F3724] font-semibold text-sm">{successMessage}</span>
+                <div className="bg-[#006495]/10 border-2 border-[#006495]/40 rounded-xl p-3 mb-4 flex items-center gap-2">
+                  <CheckCircle className="h-5 w-5 text-[#006495]" />
+                  <span className="text-[#001B46] font-semibold text-sm">{successMessage}</span>
                 </div>
               )}
 
               {error && (
-                <div className="bg-[#D1AB6D]/15 border-2 border-[#D1AB6D]/60 rounded-xl p-3 mb-4 flex items-center gap-2">
-                  <AlertCircle className="h-5 w-5 text-[#3D5033]" />
-                  <span className="text-[#2F3724] font-semibold text-sm">{error}</span>
+                <div className="bg-[#006495]/10 border-2 border-[#006495]/40 rounded-xl p-3 mb-4 flex items-center gap-2">
+                  <AlertCircle className="h-5 w-5 text-[#006495]" />
+                  <span className="text-[#001B46] font-semibold text-sm">{error}</span>
                 </div>
               )}
 
@@ -1412,22 +1412,22 @@ export default function DashboardPage() {
             </div>
 
             {/* Entourage List */}
-            <div className="bg-[#F0F0EE] rounded-2xl shadow-md border border-[#E0CFB5]/60 overflow-hidden">
+            <div className="bg-white rounded-2xl shadow-md border border-[#006495]/20 overflow-hidden">
               <div className="overflow-x-auto">
                 <table className="w-full">
-                  <thead className="bg-[#E0CFB5]/60">
+                  <thead className="bg-[#E6F3FF]">
                     <tr>
-                      <th className="text-left px-6 py-4 text-sm font-bold text-[#2F3724] font-sans">Name</th>
-                      <th className="text-left px-6 py-4 text-sm font-bold text-[#2F3724] font-sans">Role Category</th>
-                      <th className="text-left px-6 py-4 text-sm font-bold text-[#2F3724] font-sans">Role Title</th>
-                      <th className="text-left px-6 py-4 text-sm font-bold text-[#2F3724] font-sans">Email</th>
-                      <th className="text-center px-6 py-4 text-sm font-bold text-[#2F3724] font-sans">Actions</th>
+                      <th className="text-left px-6 py-4 text-sm font-bold text-[#001B46] font-sans">Name</th>
+                      <th className="text-left px-6 py-4 text-sm font-bold text-[#001B46] font-sans">Role Category</th>
+                      <th className="text-left px-6 py-4 text-sm font-bold text-[#001B46] font-sans">Role Title</th>
+                      <th className="text-left px-6 py-4 text-sm font-bold text-[#001B46] font-sans">Email</th>
+                      <th className="text-center px-6 py-4 text-sm font-bold text-[#001B46] font-sans">Actions</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-[#E0CFB5]/40">
+                  <tbody className="divide-y divide-[#006495]/10">
                     {filteredEntourage.length === 0 ? (
                       <tr>
-                        <td colSpan={5} className="px-6 py-12 text-center text-[#2F3724]/60 font-sans">
+                        <td colSpan={5} className="px-6 py-12 text-center text-[#001B46]/60 font-sans">
                           {isLoading ? (
                             <div className="flex items-center justify-center gap-2">
                               <RefreshCw className="h-5 w-5 animate-spin" />
@@ -1440,22 +1440,22 @@ export default function DashboardPage() {
                       </tr>
                     ) : (
                       filteredEntourage.map((member, index) => (
-                        <tr key={index} className="hover:bg-[#E0CFB5]/20 transition-colors bg-[#FDF7EF]">
-                          <td className="px-6 py-4 font-medium text-[#2F3724] font-sans">{member.Name}</td>
-                          <td className="px-6 py-4 text-[#2F3724]/70 font-sans">
+                        <tr key={index} className="hover:bg-[#E6F3FF] transition-colors bg-[#F7FBFF]">
+                          <td className="px-6 py-4 font-medium text-[#001B46] font-sans">{member.Name}</td>
+                          <td className="px-6 py-4 text-[#001B46]/70 font-sans">
                             {member.RoleCategory || "-"}
                           </td>
-                          <td className="px-6 py-4 text-[#2F3724]/70 font-sans">
+                          <td className="px-6 py-4 text-[#001B46]/70 font-sans">
                             {member.RoleTitle || "-"}
                           </td>
-                          <td className="px-6 py-4 text-[#2F3724]/70 font-sans">
+                          <td className="px-6 py-4 text-[#001B46]/70 font-sans">
                             {member.Email && member.Email !== "Pending" ? member.Email : "-"}
                           </td>
                           <td className="px-6 py-4 text-center">
                             <div className="flex items-center justify-center gap-2">
                               <button
                                 onClick={() => handleEditEntourageClick(member)}
-                                className="p-2 text-[#3D5033] hover:bg-[#E0CFB5]/30 rounded-lg transition-colors"
+                                className="p-2 text-[#006495] hover:bg-[#006495]/10 rounded-lg transition-colors"
                                 title="Edit member"
                               >
                                 <Edit2 className="h-4 w-4" />
@@ -1488,17 +1488,17 @@ export default function DashboardPage() {
         {activeTab === "principalsponsor" && (
           <>
             {/* Search Section */}
-            <div className="bg-[#F0F0EE] rounded-2xl p-6 shadow-md border border-[#E0CFB5]/60 mb-6">
+            <div className="bg-white rounded-2xl p-6 shadow-md border border-[#006495]/20 mb-6">
               <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between mb-4">
                 <div className="flex-1 w-full">
                   <div className="relative">
-                    <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-[#2F3724]/40" />
+                    <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-[#001B46]/40" />
                     <input
                       type="text"
                       value={searchPrincipalSponsorQuery}
                       onChange={(e) => setSearchPrincipalSponsorQuery(e.target.value)}
                       placeholder="Search by name..."
-                      className="w-full pl-10 pr-4 py-2 border-2 border-[#E0CFB5]/50 focus:border-[#D1AB6D] rounded-xl font-sans text-black placeholder:text-[#2F3724]/40 transition-all duration-300 focus:ring-4 focus:ring-[#D1AB6D]/20 bg-white"
+                      className="w-full pl-10 pr-4 py-2 border-2 border-[#006495]/20 focus:border-[#006495] rounded-xl font-sans text-black placeholder:text-[#001B46]/40 transition-all duration-300 focus:ring-4 focus:ring-[#006495]/20 bg-white"
                     />
                   </div>
                 </div>
@@ -1508,7 +1508,7 @@ export default function DashboardPage() {
                     setPrincipalSponsorFormData({ MalePrincipalSponsor: "", FemalePrincipalSponsor: "" })
                     setShowPrincipalSponsorModal(true)
                   }}
-                className="bg-[#909E8D] hover:bg-[#A5B4A3] text-black transition-colors border border-[#F0F0EE]/60"
+                className="bg-[#006495] hover:bg-[#00527A] text-white transition-colors border border-[#006495]/40"
                 >
                   <Plus className="h-4 w-4 mr-2" />
                   Add Sponsors
@@ -1517,36 +1517,36 @@ export default function DashboardPage() {
 
               {/* Success/Error Messages */}
               {successMessage && (
-                <div className="bg-[#D1AB6D]/15 border-2 border-[#D1AB6D]/60 rounded-xl p-3 mb-4 flex items-center gap-2">
-                  <CheckCircle className="h-5 w-5 text-[#3D5033]" />
-                  <span className="text-[#2F3724] font-semibold text-sm">{successMessage}</span>
+                <div className="bg-[#006495]/10 border-2 border-[#006495]/40 rounded-xl p-3 mb-4 flex items-center gap-2">
+                  <CheckCircle className="h-5 w-5 text-[#006495]" />
+                  <span className="text-[#001B46] font-semibold text-sm">{successMessage}</span>
                 </div>
               )}
 
               {error && (
-                <div className="bg-[#D1AB6D]/15 border-2 border-[#D1AB6D]/60 rounded-xl p-3 mb-4 flex items-center gap-2">
-                  <AlertCircle className="h-5 w-5 text-[#3D5033]" />
-                  <span className="text-[#2F3724] font-semibold text-sm">{error}</span>
+                <div className="bg-[#006495]/10 border-2 border-[#006495]/40 rounded-xl p-3 mb-4 flex items-center gap-2">
+                  <AlertCircle className="h-5 w-5 text-[#006495]" />
+                  <span className="text-[#001B46] font-semibold text-sm">{error}</span>
                 </div>
               )}
 
             </div>
 
             {/* PrincipalSponsor List */}
-            <div className="bg-[#F0F0EE] rounded-2xl shadow-md border border-[#E0CFB5]/60 overflow-hidden">
+            <div className="bg-white rounded-2xl shadow-md border border-[#006495]/20 overflow-hidden">
               <div className="overflow-x-auto">
                 <table className="w-full">
-                  <thead className="bg-[#E0CFB5]/60">
+                  <thead className="bg-[#E6F3FF]">
                     <tr>
-                      <th className="text-left px-6 py-4 text-sm font-bold text-[#2F3724] font-sans">Male Principal Sponsor</th>
-                      <th className="text-left px-6 py-4 text-sm font-bold text-[#2F3724] font-sans">Female Principal Sponsor</th>
-                      <th className="text-center px-6 py-4 text-sm font-bold text-[#2F3724] font-sans">Actions</th>
+                      <th className="text-left px-6 py-4 text-sm font-bold text-[#001B46] font-sans">Male Principal Sponsor</th>
+                      <th className="text-left px-6 py-4 text-sm font-bold text-[#001B46] font-sans">Female Principal Sponsor</th>
+                      <th className="text-center px-6 py-4 text-sm font-bold text-[#001B46] font-sans">Actions</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-[#E0CFB5]/40">
+                  <tbody className="divide-y divide-[#006495]/10">
                     {filteredPrincipalSponsors.length === 0 ? (
                       <tr>
-                        <td colSpan={3} className="px-6 py-12 text-center text-[#2F3724]/60 font-sans">
+                        <td colSpan={3} className="px-6 py-12 text-center text-[#001B46]/60 font-sans">
                           {isLoading ? (
                             <div className="flex items-center justify-center gap-2">
                               <RefreshCw className="h-5 w-5 animate-spin" />
@@ -1559,16 +1559,16 @@ export default function DashboardPage() {
                       </tr>
                     ) : (
                       filteredPrincipalSponsors.map((sponsor, index) => (
-                        <tr key={index} className="hover:bg-[#E0CFB5]/20 transition-colors bg-[#FDF7EF]">
-                          <td className="px-6 py-4 font-medium text-[#2F3724] font-sans">{sponsor.MalePrincipalSponsor}</td>
-                          <td className="px-6 py-4 text-[#2F3724]/70 font-sans">
+                        <tr key={index} className="hover:bg-[#E6F3FF] transition-colors bg-[#F7FBFF]">
+                          <td className="px-6 py-4 font-medium text-[#001B46] font-sans">{sponsor.MalePrincipalSponsor}</td>
+                          <td className="px-6 py-4 text-[#001B46]/70 font-sans">
                             {sponsor.FemalePrincipalSponsor || "-"}
                           </td>
                           <td className="px-6 py-4 text-center">
                             <div className="flex items-center justify-center gap-2">
                               <button
                                 onClick={() => handleEditPrincipalSponsorClick(sponsor)}
-                                className="p-2 text-[#3D5033] hover:bg-[#E0CFB5]/30 rounded-lg transition-colors"
+                                className="p-2 text-[#006495] hover:bg-[#006495]/10 rounded-lg transition-colors"
                                 title="Edit sponsors"
                               >
                                 <Edit2 className="h-4 w-4" />

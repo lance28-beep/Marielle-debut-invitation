@@ -12,21 +12,42 @@ const cormorant = Cormorant_Garamond({
   weight: ["400"],
 })
 
+const STAR_POSITIONS = [
+  { top: "6%", left: "12%", size: 2, opacity: 0.9 },
+  { top: "12%", left: "32%", size: 2.4, opacity: 0.8 },
+  { top: "9%", left: "58%", size: 2, opacity: 0.85 },
+  { top: "7%", left: "78%", size: 1.6, opacity: 0.7 },
+  { top: "18%", left: "84%", size: 2.5, opacity: 0.82 },
+  { top: "22%", left: "18%", size: 2, opacity: 0.65 },
+  { top: "28%", left: "42%", size: 3, opacity: 0.9 },
+  { top: "26%", left: "66%", size: 2, opacity: 0.75 },
+  { top: "34%", left: "80%", size: 1.8, opacity: 0.7 },
+  { top: "36%", left: "28%", size: 2.2, opacity: 0.8 },
+  { top: "44%", left: "12%", size: 1.8, opacity: 0.72 },
+  { top: "42%", left: "50%", size: 2.4, opacity: 0.85 },
+  { top: "48%", left: "70%", size: 2, opacity: 0.78 },
+  { top: "52%", left: "88%", size: 1.9, opacity: 0.7 },
+  { top: "58%", left: "24%", size: 2.6, opacity: 0.82 },
+  { top: "60%", left: "54%", size: 1.9, opacity: 0.75 },
+  { top: "64%", left: "76%", size: 2.2, opacity: 0.8 },
+  { top: "70%", left: "14%", size: 2, opacity: 0.7 },
+  { top: "74%", left: "38%", size: 2.6, opacity: 0.84 },
+  { top: "78%", left: "60%", size: 2, opacity: 0.74 },
+  { top: "82%", left: "82%", size: 1.8, opacity: 0.7 },
+  { top: "86%", left: "50%", size: 2.4, opacity: 0.82 },
+  { top: "90%", left: "20%", size: 2, opacity: 0.72 },
+]
+
 export function Footer() {
   const year = new Date().getFullYear()
-  const ceremonyDate = siteConfig.ceremony.date
-  const ceremonyTime = siteConfig.ceremony.time
-  const receptionTime = siteConfig.reception.time
-  const ceremonyVenue = siteConfig.ceremony.venue
-  const receptionVenue = siteConfig.reception.venue
-
-  const [ceremonyMonth = "December", ceremonyDayRaw = "21", ceremonyYear = "2025"] = ceremonyDate.split(" ")
-  const ceremonyDayNumber = ceremonyDayRaw.replace(/[^0-9]/g, "") || "21"
+  const debutDate = "December 17, 2025"
+  const debutTime = "6:00 PM"
+  const debutVenue = "Roy's Hotel and Convention Center, Araneta Ave, Tangub, Bacolod"
 
   const quotes = [
-    `"I have found the one whom my soul loves." – Song of Solomon 3:4`,
-    "Welcome to our wedding website! We've found a love that's a true blessing, and we give thanks to God for writing the beautiful story of our journey together.",
-    "Thank you for your love, prayers, and support. We can't wait to celebrate this joyful day together!",
+    `"And in her eyes, the stars found their mirror."`,
+    "Thank you for lighting up Marielle's Moonlit Masquerade—your presence makes the night shimmer.",
+    "Your wishes, prayers, and smiles will be the keepsakes she treasures most.",
   ]
 
   const [currentQuoteIndex, setCurrentQuoteIndex] = useState(0)
@@ -80,23 +101,42 @@ export function Footer() {
 
   const nav = [
     { label: "Home", href: "#home" },
-    { label: "Our Story", href: "#narrative" },
-    { label: "Events", href: "#details" },
-    { label: "Gallery", href: "#gallery" },
+    { label: "Countdown", href: "#countdown" },
+    { label: "Messages", href: "#messages" },
+    { label: "Details", href: "#details" },
+    { label: "Entourage", href: "#entourage" },
     { label: "Snap & Share", href: "#snap-share" },
     { label: "RSVP", href: "#guest-list" },
+    { label: "FAQ", href: "#faq" },
   ] as const
 
   return (
     <footer 
-      className="relative z-20 mt-16 overflow-hidden bg-[#525E2C]"
+      className="relative z-20 mt-16 overflow-hidden bg-transparent"
     >
-      {/* Background elements with sage & champagne motif (aligned with other sections) */}
+      {/* Moonlit backdrop */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        {/* Subtle gradient overlays */}
-        <div className="absolute top-0 left-0 w-full h-1/3 bg-gradient-to-b from-[#3D4636]/90 via-[#525E2C]/70 to-transparent" />
-        <div className="absolute bottom-0 left-0 w-full h-1/3 bg-gradient-to-t from-[#3D4636]/95 via-[#525E2C]/70 to-transparent" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(224,207,181,0.28),transparent_55%)] opacity-90" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#0a1628] via-[#0f2541] to-[#122f52]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_25%_18%,rgba(180,210,255,0.22),transparent_45%)] opacity-80" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_75%_72%,rgba(120,170,255,0.18),transparent_55%)] opacity-70 blur-sm" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#081020]/65 via-transparent to-transparent" />
+        <div className="absolute inset-0">
+          {STAR_POSITIONS.map((star, idx) => (
+            <div
+              key={idx}
+              className="absolute rounded-full bg-white animate-pulse"
+              style={{
+                top: star.top,
+                left: star.left,
+                width: `${star.size}px`,
+                height: `${star.size}px`,
+                opacity: star.opacity,
+                animationDuration: `${2 + (idx % 5) * 0.5}s`,
+                animationDelay: `${(idx % 7) * 0.25}s`,
+              }}
+            />
+          ))}
+        </div>
       </div>
       
       {/* Monogram / Couple Illustration - centered at top */}
@@ -107,21 +147,20 @@ export function Footer() {
           transition={{ duration: 1, ease: "easeOut" }}
           className="relative"
         >
-          <div className="relative w-56 h-56 sm:w-64 sm:h-64 md:w-80 md:h-80 lg:w-[22rem] lg:h-[22rem] xl:w-[26rem] xl:h-[26rem] opacity-95">
+          <div className="relative w-40 h-40 sm:w-48 sm:h-48 md:w-56 md:h-56 lg:w-64 lg:h-64 xl:w-72 xl:h-72 opacity-95">
             <Image
-              src="/weddingTimeline/coupleImage-removebg.png"
-              alt={`${siteConfig.couple.groomNickname} & ${siteConfig.couple.brideNickname} illustration`}
+              src="/monogram/monogramnew.png"
+              alt="Marielle monogram"
               fill
               className="object-contain"
               priority={false}
               style={{
-                // Convert illustration to a soft #F0F0EE tone to match the footer aesthetic
                 filter:
-                  "brightness(0) saturate(100%) invert(96%) sepia(2%) saturate(320%) hue-rotate(9deg) brightness(102%) contrast(96%)",
+                  "brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(0%) hue-rotate(222deg) brightness(112%) contrast(98%)",
               }}
             />
             {/* Glow effect behind monogram */}
-            <div className="absolute inset-0 blur-3xl bg-[#E0CFB5]/35 -z-10 scale-125" />
+            <div className="absolute inset-0 blur-3xl bg-[#cfe7ff]/35 -z-10 scale-125" />
           </div>
         </motion.div>
 
@@ -130,12 +169,12 @@ export function Footer() {
           <p
             className={`${cormorant.className} tracking-[0.3em] text-[10px] sm:text-xs md:text-sm text-[#F0F0EE]/95`}
           >
-            Marzan and Nica
+            Marielle
           </p>
           <p
             className={`${cormorant.className} text-xs sm:text-sm md:text-base text-[#F0F0EE]/90 mt-1`}
           >
-            {ceremonyDate}
+            {debutDate}
           </p>
         </div>
       </div>
@@ -146,72 +185,57 @@ export function Footer() {
           <motion.div className="lg:col-span-2" variants={fadeInUp}>
             <div className="mb-6 sm:mb-8">
               <div className="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-5 md:mb-6">
-                <div className="w-10 h-10 sm:w-11 sm:h-11 md:w-12 md:h-12 bg-[#F0F0EE]/15 rounded-full flex items-center justify-center border border-[#E0CFB5]/70 flex-shrink-0 shadow-[0_0_22px_rgba(224,207,181,0.55)]">
-                  <Heart className="w-5 h-5 sm:w-5.5 sm:h-5.5 md:w-6 md:h-6 text-[#F0F0EE]" fill="#D1AB6D" />
+                <div className="w-10 h-10 sm:w-11 sm:h-11 md:w-12 md:h-12 bg-white/12 rounded-full flex items-center justify-center border border-white/30 flex-shrink-0 shadow-[0_0_22px_rgba(125,183,255,0.45)]">
+                  <Heart className="w-5 h-5 sm:w-5.5 sm:h-5.5 md:w-6 md:h-6 text-white" fill="#7db7ff" />
                 </div>
-                <h3 className="style-script-regular text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-normal text-white drop-shadow-lg">{siteConfig.couple.groomNickname} and {siteConfig.couple.brideNickname}</h3>
+                <h3 className="style-script-regular text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-normal text-white drop-shadow-lg">Marielle</h3>
               </div>
               <div className="space-y-3 sm:space-y-3.5 md:space-y-4">
                 <div className={`flex items-center gap-2 sm:gap-2.5 md:gap-3 ${cormorant.className} text-white/90`}>
                   <Calendar className="w-4 h-4 sm:w-4.5 sm:h-4.5 md:w-5 md:h-5 text-white flex-shrink-0" />
-                  <span className="text-sm sm:text-base md:text-lg font-medium">{ceremonyDate}</span>
+                  <span className="text-sm sm:text-base md:text-lg font-medium">{debutDate}</span>
+                </div>
+                <div className={`flex items-center gap-2 sm:gap-2.5 md:gap-3 ${cormorant.className} text-white/90`}>
+                  <Clock className="w-4 h-4 sm:w-4.5 sm:h-4.5 md:w-5 md:h-5 text-white flex-shrink-0" />
+                  <span className="text-xs sm:text-sm md:text-base">{debutTime}</span>
                 </div>
                 <div className={`flex items-center gap-2 sm:gap-2.5 md:gap-3 ${cormorant.className} text-white/90`}>
                   <MapPin className="w-4 h-4 sm:w-4.5 sm:h-4.5 md:w-5 md:h-5 text-white flex-shrink-0" />
-                  <span className="text-xs sm:text-sm md:text-base">{ceremonyVenue}</span>
+                  <span className="text-xs sm:text-sm md:text-base">{debutVenue}</span>
                 </div>
               </div>
             </div>
 
-            <motion.div className="bg-white/10 backdrop-blur-sm rounded-xl sm:rounded-2xl p-4 sm:p-5 md:p-6 border border-[#E0CFB5]/60 shadow-[0_18px_45px_rgba(0,0,0,0.45)]" whileHover={{ scale: 1.02 }} transition={{ duration: 0.3 }}>
-              <blockquote className={`${cormorant.className} text-[#F0F0EE] italic text-sm sm:text-base md:text-lg leading-relaxed min-h-[60px] sm:min-h-[70px] md:min-h-[80px]`}>
+            <motion.div className="bg-white/10 backdrop-blur-sm rounded-xl sm:rounded-2xl p-4 sm: p-5 md:p-6 border border-white/20 shadow-[0_18px_45px_rgba(0,0,0,0.45)]" whileHover={{ scale: 1.02 }} transition={{ duration: 0.3 }}>
+              <blockquote className={`${cormorant.className} text-white italic text-sm sm:text-base md:text-lg leading-relaxed min-h-[60px] sm:min-h-[70px] md:min-h-[80px]`}>
                 "{displayedText}
                 <span className="inline-block w-0.5 h-4 sm:h-5 md:h-6 bg-white ml-1 animate-pulse">|</span>"
               </blockquote>
               <div className="flex items-center gap-1.5 sm:gap-2 mt-3 sm:mt-4">
-                <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-[#D1AB6D]/85 rounded-full" />
-                <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-[#F0F0EE]/85 rounded-full" />
-                <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-[#D1AB6D]/85 rounded-full" />
+                <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-[#7db7ff]/85 rounded-full" />
+                <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-white/85 rounded-full" />
+                <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-[#7db7ff]/85 rounded-full" />
               </div>
             </motion.div>
           </motion.div>
 
           {/* Event Details quick tiles */}
           <motion.div className="space-y-4 sm:space-y-5 md:space-y-6" variants={fadeInUp}>
-            <motion.div className="bg-white/8 backdrop-blur-sm rounded-xl sm:rounded-2xl p-4 sm:p-5 md:p-6 border border-[#E0CFB5]/60 hover:bg-white/14 transition-all duration-300 shadow-[0_14px_40px_rgba(0,0,0,0.35)]" whileHover={{ y: -5 }}>
+            <motion.div className="bg-white/8 backdrop-blur-sm rounded-xl sm:rounded-2xl p-4 sm:p-5 md:p-6 border border-white/20 hover:bg-white/14 transition-all duration-300 shadow-[0_14px_40px_rgba(0,0,0,0.35)]" whileHover={{ y: -5 }}>
               <div className="flex items-center gap-2 sm:gap-2.5 md:gap-3 mb-3 sm:mb-3.5 md:mb-4">
-                <div className="w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10 bg-[#F0F0EE]/15 rounded-full flex items-center justify-center border border-[#E0CFB5]/70 flex-shrink-0">
-                  <Clock className="w-4 h-4 sm:w-4.5 sm:h-4.5 md:w-5 md:h-5 text-[#F0F0EE]" />
+                <div className="w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10 bg-white/15 rounded-full flex items-center justify-center border border-white/40 flex-shrink-0">
+                  <Clock className="w-4 h-4 sm:w-4.5 sm:h-4.5 md:w-5 md:h-5 text-white" />
                 </div>
-                <h4 className={`${cormorant.className} font-semibold text-base sm:text-lg md:text-xl text-white`}>Ceremony</h4>
+                <h4 className={`${cormorant.className} font-semibold text-base sm:text-lg md:text-xl text-white`}>Debut Night</h4>
               </div>
-              <div className={`space-y-2 sm:space-y-2.5 md:space-y-3 ${cormorant.className} text-[#F0F0EE]/95 text-xs sm:text-sm`}>
+              <div className={`space-y-2 sm:space-y-2.5 md:space-y-3 ${cormorant.className} text-white/95 text-xs sm:text-sm`}>
                 <div className="flex items-center gap-2 sm:gap-2.5 md:gap-3">
-                  <MapPin className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#F0F0EE] flex-shrink-0" />
-                  <span>{ceremonyVenue}</span>
+                  <MapPin className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-white flex-shrink-0" />
+                  <span>{debutVenue}</span>
                 </div>
                 <div className="flex items-center gap-2 sm:gap-2.5 md:gap-3">
-                  <Clock className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#F0F0EE] flex-shrink-0" />
-                  <span>{ceremonyTime}</span>
-                </div>
-              </div>
-            </motion.div>
-
-            <motion.div className="bg-white/8 backdrop-blur-sm rounded-xl sm:rounded-2xl p-4 sm:p-5 md:p-6 border border-[#E0CFB5]/60 hover:bg-white/14 transition-all duration-300 shadow-[0_14px_40px_rgba(0,0,0,0.35)]" whileHover={{ y: -5 }}>
-              <div className="flex items-center gap-2 sm:gap-2.5 md:gap-3 mb-3 sm:mb-3.5 md:mb-4">
-                <div className="w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10 bg-[#F0F0EE]/15 rounded-full flex items-center justify-center border border-[#E0CFB5]/70 flex-shrink-0">
-                  <Heart className="w-4 h-4 sm:w-4.5 sm:h-4.5 md:w-5 md:h-5 text-[#F0F0EE]" fill="#D1AB6D" />
-                </div>
-                <h4 className={`${cormorant.className} font-semibold text-base sm:text-lg md:text-xl text-white`}>Reception</h4>
-              </div>
-              <div className={`space-y-2 sm:space-y-2.5 md:space-y-3 ${cormorant.className} text-[#F0F0EE]/95 text-xs sm:text-sm`}>
-                <div className="flex items-center gap-2 sm:gap-2.5 md:gap-3">
-                  <MapPin className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#F0F0EE] flex-shrink-0" />
-                  <span>{receptionVenue}</span>
-                </div>
-                <div className="flex items-center gap-2 sm:gap-2.5 md:gap-3">
-                  <Clock className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#F0F0EE] flex-shrink-0" />
-                  <span>{receptionTime}</span>
+                  <Clock className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-white flex-shrink-0" />
+                  <span>{debutTime}</span>
                 </div>
               </div>
             </motion.div>
@@ -221,7 +245,7 @@ export function Footer() {
           <motion.div className="space-y-6 sm:space-y-7 md:space-y-8" variants={fadeInUp}>
             <div>
               <h4 className={`${cormorant.className} font-semibold text-base sm:text-lg md:text-xl mb-4 sm:mb-5 md:mb-6 flex items-center gap-2 sm:gap-2.5 md:gap-3 text-white`}>
-                <div className="w-1.5 sm:w-2 h-6 sm:h-7 md:h-8 bg-[#D1AB6D]/85 rounded-full" /> Follow Us
+                <div className="w-1.5 sm:w-2 h-6 sm:h-7 md:h-8 bg-[#7db7ff]/85 rounded-full" /> Follow Us
               </h4>
               <div className="flex items-center gap-2 sm:gap-2.5 md:gap-3 flex-wrap">
                 <a 
@@ -284,7 +308,7 @@ export function Footer() {
         <motion.div className="border-t border-[#E0CFB5]/60 pt-6 sm:pt-7 md:pt-8" variants={fadeInUp}>
           <div className="flex flex-col md:flex-row items-center justify-between gap-4 sm:gap-5 md:gap-6">
             <div className="text-center md:text-left">
-              <p className={`text-[#F0F0EE]/95 ${cormorant.className} text-xs sm:text-sm`}>© {year} {siteConfig.couple.groomNickname} and {siteConfig.couple.brideNickname}. All rights reserved.</p>
+                <p className={`text-[#F0F0EE]/95 ${cormorant.className} text-xs sm:text-sm`}>© {year} Marielle. All rights reserved.</p>
               <p className={`text-[#F0F0EE]/90 ${cormorant.className} text-xs sm:text-sm mt-0.5 sm:mt-1`}>
                 Made with 💕 for our special day
               </p>

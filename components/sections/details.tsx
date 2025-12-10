@@ -1,49 +1,41 @@
-"use client"
-
 import { Section } from "@/components/section"
 import { siteConfig } from "@/content/site"
-import {
-  Clock,
-  Utensils,
-  Car,
-  Copy,
-  Check,
-  Navigation,
-  Heart,
-  Camera,
-  X,
-  MapPin,
-} from "lucide-react"
-import { useState, useEffect } from "react"
+import { Clock, PartyPopper, MapPin, Navigation, Copy, Check, Palette, Sparkles } from "lucide-react"
+import { useState } from "react"
 import Image from "next/image"
-import { Cormorant_Garamond } from "next/font/google"
+import { Great_Vibes, Inter } from "next/font/google"
 
-const cormorant = Cormorant_Garamond({
-  subsets: ["latin"],
-  weight: ["400"],
-})
+const greatVibes = Great_Vibes({ subsets: ["latin"], weight: "400" })
+const inter = Inter({ subsets: ["latin"], weight: ["300", "400", "500", "600"] })
+
+const STAR_POSITIONS = [
+  { top: "8%", left: "12%", size: 2, opacity: 0.9 },
+  { top: "14%", left: "32%", size: 3, opacity: 0.75 },
+  { top: "10%", left: "58%", size: 2, opacity: 0.85 },
+  { top: "6%", left: "78%", size: 1.5, opacity: 0.7 },
+  { top: "18%", left: "85%", size: 2.5, opacity: 0.8 },
+  { top: "22%", left: "18%", size: 2, opacity: 0.65 },
+  { top: "28%", left: "42%", size: 3, opacity: 0.9 },
+  { top: "26%", left: "65%", size: 2, opacity: 0.75 },
+  { top: "32%", left: "82%", size: 1.6, opacity: 0.7 },
+  { top: "36%", left: "28%", size: 2.2, opacity: 0.8 },
+  { top: "44%", left: "12%", size: 1.8, opacity: 0.72 },
+  { top: "40%", left: "48%", size: 2.4, opacity: 0.85 },
+  { top: "46%", left: "70%", size: 2, opacity: 0.78 },
+  { top: "52%", left: "86%", size: 1.8, opacity: 0.68 },
+  { top: "58%", left: "24%", size: 2.6, opacity: 0.82 },
+  { top: "60%", left: "54%", size: 1.9, opacity: 0.75 },
+  { top: "64%", left: "76%", size: 2.2, opacity: 0.8 },
+  { top: "70%", left: "14%", size: 2, opacity: 0.7 },
+  { top: "74%", left: "38%", size: 2.6, opacity: 0.84 },
+  { top: "78%", left: "60%", size: 2, opacity: 0.74 },
+  { top: "82%", left: "82%", size: 1.8, opacity: 0.7 },
+  { top: "86%", left: "50%", size: 2.4, opacity: 0.82 },
+  { top: "90%", left: "20%", size: 2, opacity: 0.72 },
+]
 
 export function Details() {
   const [copiedItems, setCopiedItems] = useState<Set<string>>(new Set())
-  const [showImageModal, setShowImageModal] = useState<string | null>(null)
-
-  // Handle ESC key to close modal
-  useEffect(() => {
-    const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === "Escape" && showImageModal) {
-        setShowImageModal(null)
-      }
-    }
-
-    if (showImageModal) {
-      document.addEventListener("keydown", handleEscape)
-      document.body.style.overflow = "hidden"
-    }
-    return () => {
-      document.removeEventListener("keydown", handleEscape)
-      document.body.style.overflow = "unset"
-    }
-  }, [showImageModal])
 
   const copyToClipboard = async (text: string, itemId: string) => {
     try {
@@ -51,620 +43,241 @@ export function Details() {
       setCopiedItems((prev) => new Set(prev).add(itemId))
       setTimeout(() => {
         setCopiedItems((prev) => {
-          const newSet = new Set(prev)
-          newSet.delete(itemId)
-          return newSet
+          const updated = new Set(prev)
+          updated.delete(itemId)
+          return updated
         })
-      }, 2000)
-    } catch (err) {
-      console.error("Failed to copy text: ", err)
+      }, 1800)
+    } catch (error) {
+      console.error("Failed to copy text:", error)
     }
   }
 
-  // Generate Google Maps links
-  const ceremonyMapsLink = `https://maps.google.com/?q=${encodeURIComponent(siteConfig.ceremony.location)}`
-  const receptionMapsLink = `https://maps.google.com/?q=${encodeURIComponent(siteConfig.reception.location)}`
+  const { ceremony, reception } = siteConfig
+  const venue = "Roy's Hotel and Convention Center"
+  const venueAddress = "Araneta Ave, Tangub, Bacolod (Negros Occidental), Philippines"
+  const entourageCall = ceremony.entourageTime
+  const guestsCall = ceremony.guestsTime
+  const mapsLink = `https://maps.google.com/?q=${encodeURIComponent(venueAddress)}`
 
-  // Palettes (used only for color chips in attire card) - Green motif
-  const sponsorPalette = ["#2D5016", "#4A7C59", "#6B9B7A"]
-  const guestPalette = ["#8FB99A", "#B8D5C3", "#D4E8D9", "#6B9B7A", "#4A7C59"]
-  const secondaryPalette = ["#E8F5EB", "#D4E8D9", "#B8D5C3", "#8FB99A", "#6B9B7A"]
-
-  const openInMaps = (link: string) => {
-    window.open(link, "_blank", "noopener,noreferrer")
+  const openInMaps = () => {
+    window.open(mapsLink, "_blank", "noopener,noreferrer")
   }
 
+  const colorPalette = [
+    "#0f2541",
+    "#1e3a67",
+    "#27467a",
+    "#4f7cbf",
+    "#7db7ff",
+    "#9ac8ff",
+    "#cfe7ff",
+    "#e8f6ff",
+  ]
+
+  const schedule = [
+    { label: "Ceremony Begins", value: ceremony.time },
+    { label: "Reception Follows", value: reception.time },
+    entourageCall && { label: "Entourage Call Time", value: entourageCall },
+    guestsCall && { label: "Guest Doors Open", value: guestsCall },
+  ].filter(Boolean) as { label: string; value: string }[]
+
   return (
-    <Section
-      id="details"
-      className="relative py-12 md:py-16 lg:py-20 overflow-hidden bg-[#3D5033]"
-    >
-      {/* Background elements with burgundy motif (same as narrative section) */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        {/* Subtle gradient overlays */}
-        <div className="absolute top-0 left-0 w-full h-1/3 bg-gradient-to-b from-[#3D5033]/85 via-[#525E2C]/60 to-transparent" />
-        <div className="absolute bottom-0 left-0 w-full h-1/3 bg-gradient-to-t from-[#3D5033]/90 via-[#525E2C]/55 to-transparent" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(144,158,141,0.22),transparent_55%)] opacity-80" />
-      </div>
-
-      {/* Header */}
-      <div className="relative z-30 text-center mb-6 sm:mb-9 md:mb-12 px-3 sm:px-4">
-        {/* Small label */}
-        <p
-          className={`${cormorant.className} text-[0.7rem] sm:text-xs md:text-sm uppercase tracking-[0.28em] text-white mb-2`}
-          style={{ textShadow: "0 2px 10px rgba(0,0,0,0.75)" }}
-        >
-          Ceremony & Reception Details
-        </p>
-
-        <h2
-          className="style-script-regular text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-white mb-1.5 sm:mb-3 md:mb-4"
-          style={{ textShadow: "0 4px 18px rgba(0,0,0,0.9)" }}
-        >
-          Event Details
-        </h2>
-
-        <p className="text-[11px] sm:text-sm md:text-base lg:text-lg text-white/95 max-w-xl mx-auto leading-relaxed px-2">
-          Everything you need to join us as we say&nbsp;
-          <span className="font-semibold text-white">“I do.”</span>
-        </p>
-
-        {/* Simple divider */}
-        <div className="flex items-center justify-center gap-2 mt-3 sm:mt-4">
-          <div className="w-8 sm:w-12 md:w-16 h-px bg-gradient-to-r from-transparent via-white/60 to-transparent" />
-          <div className="w-1.5 h-1.5 bg-white rounded-full shadow-[0_0_12px_rgba(255,255,255,0.7)]" />
-          <div className="w-8 sm:w-12 md:w-16 h-px bg-gradient-to-l from-transparent via-white/60 to-transparent" />
-        </div>
-      </div>
-
-      {/* Ceremony & Reception Locations (separate cards) */}
-      <div className="relative z-10 mb-4 sm:mb-8 max-w-6xl mx-auto px-3 sm:px-5 space-y-3 sm:space-y-4">
-        <div className="text-center text-white/90">
-          <p className="text-[10px] sm:text-xs tracking-[0.3em] uppercase">
-            Ceremony &amp; Reception Location
-          </p>
-          <p className="text-sm sm:text-base md:text-lg font-semibold">
-            Daraga Church &amp; Hotel St. Ellis in Legazpi
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 sm:gap-4">
-          {[
-            {
-              key: "ceremony",
-              label: "Ceremony",
-              venue: siteConfig.ceremony.venue,
-              location: siteConfig.ceremony.location,
-              date: siteConfig.ceremony.date,
-              time: siteConfig.ceremony.time,
-              mapLink: ceremonyMapsLink,
-              gradient: "from-[#3D5033] via-[#525E2C] to-[#E0CFB5]",
-              image: "/Details/RELIGIOUS-Daraga_Church,_Albay.jpg",
-            },
-            {
-              key: "reception",
-              label: "Reception",
-              venue: siteConfig.reception.venue,
-              location: siteConfig.reception.location,
-              date: siteConfig.reception.date,
-              time: siteConfig.reception.time,
-              mapLink: receptionMapsLink,
-              gradient: "from-[#525E2C] via-[#6B9B7A] to-[#F0F0EE]",
-              image: "/Details/Hotel St. ellis.jpg",
-            },
-          ].map((info) => (
+    <Section id="details" className="relative overflow-hidden py-14 sm:py-18 md:py-20 lg:py-24 bg-transparent">
+      {/* Moonlit backdrop to match countdown */}
+      <div className="pointer-events-none absolute inset-0">
+        <div className="absolute inset-0 bg-gradient-to-b from-[#0a1628] via-[#0f2541] to-[#122f52]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(180,210,255,0.22),transparent_45%)] opacity-80" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_70%,rgba(120,170,255,0.18),transparent_55%)] opacity-70 blur-sm" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#081020]/65 via-transparent to-transparent" />
+        <div className="absolute inset-0">
+          {STAR_POSITIONS.map((star, idx) => (
             <div
-              key={info.key}
-              className="overflow-hidden rounded-xl sm:rounded-2xl border border-[#F0F0EE]/25 bg-gradient-to-b shadow-[0_20px_60px_rgba(0,0,0,0.45)] transition-transform duration-500 group hover:scale-[1.01]"
-              style={{ backgroundImage: undefined }}
-            >
-              {/* Top image */}
-              <div className="relative h-52 sm:h-64 md:h-72 w-full">
-                <Image
-                  src={info.image}
-                  alt={info.location}
-                  fill
-                  className="object-cover"
-                  sizes="100vw"
-                  priority
-                />
-                <div className={`absolute inset-0 bg-gradient-to-t from-[#3D5033]/95 via-[#525E2C]/65 to-transparent`} />
-                <div className="absolute inset-0 flex flex-col justify-end px-3 sm:px-6 pb-3 sm:pb-6 text-white">
-                  <p className="text-[10px] sm:text-xs tracking-[0.35em] uppercase opacity-85">
-                    {info.label}
-                  </p>
-                  <h3 className="text-xl sm:text-3xl font-serif font-semibold tracking-wide drop-shadow-lg">
-                    {info.venue}
-                  </h3>
-                </div>
-              </div>
-
-              {/* Details panel */}
-              <div className="bg-[#F0F0EE]/95 text-[#2E3A24] px-3 sm:px-6 py-4 sm:py-6 space-y-4 backdrop-blur-sm">
-                <div className="space-y-2.5">
-                  <div className="space-y-1">
-                    <p className="text-xs sm:text-sm text-[#243127]/90 leading-relaxed">{info.location}</p>
-                  </div>
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-1.5 sm:gap-2 text-left">
-                    <div className="rounded-md border border-[#E0CFB5] bg-white/80 px-2.5 py-2 shadow-sm">
-                      <p className="text-[9px] sm:text-[10px] font-semibold tracking-[0.18em] text-[#525E2C] uppercase mb-0.5">
-                        Date
-                      </p>
-                      <p className="text-sm sm:text-base font-bold text-[#3D5033]">{info.date}</p>
-                    </div>
-                    <div className="rounded-md border border-[#E0CFB5] bg-white/80 px-2.5 py-2 shadow-sm">
-                      <p className="text-[9px] sm:text-[10px] font-semibold tracking-[0.18em] text-[#525E2C] uppercase mb-0.5">
-                        {info.label}
-                      </p>
-                      <p className="text-sm sm:text-base font-bold text-[#3D5033]">{info.time}</p>
-                    </div>
-                    <div className="rounded-md border border-[#E0CFB5] bg-white/80 px-2.5 py-2 shadow-sm">
-                      <p className="text-[9px] sm:text-[10px] font-semibold tracking-[0.18em] text-[#525E2C] uppercase mb-0.5">
-                        Venue
-                      </p>
-                      <p className="text-sm sm:text-base font-bold text-[#3D5033]">{info.venue}</p>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5 sm:gap-3">
-                  <button
-                    onClick={() => openInMaps(info.mapLink)}
-                    className="flex items-center justify-center gap-1.5 rounded-lg bg-[#525E2C] text-white py-2.5 sm:py-3 shadow-lg hover:translate-y-[-2px] transition-all text-xs sm:text-sm font-semibold"
-                  >
-                    <Navigation className="w-4 h-4" />
-                    Get Directions
-                  </button>
-                  <button
-                    onClick={() => copyToClipboard(info.location, info.key)}
-                    className="flex items-center justify-center gap-1.5 rounded-lg border border-[#525E2C]/35 text-[#3D5033] py-2.5 sm:py-3 hover:bg-[#525E2C]/5 transition-all text-xs sm:text-sm font-semibold"
-                  >
-                    {copiedItems.has(info.key) ? (
-                      <>
-                        <Check className="w-4 h-4" />
-                        Copied
-                      </>
-                    ) : (
-                      <>
-                        <Copy className="w-4 h-4" />
-                        Copy Address
-                      </>
-                    )}
-                  </button>
-                </div>
-              </div>
-            </div>
+              key={idx}
+              className="absolute rounded-full bg-white animate-pulse"
+              style={{
+                top: star.top,
+                left: star.left,
+                width: `${star.size}px`,
+                height: `${star.size}px`,
+                opacity: star.opacity,
+                animationDuration: `${2 + (idx % 5) * 0.5}s`,
+                animationDelay: `${(idx % 7) * 0.3}s`,
+              }}
+            />
           ))}
         </div>
       </div>
 
-      {/* Additional Information - Compact for mobile */}
-      <div className="relative z-10 mb-4 sm:mb-7 max-w-4xl mx-auto px-3 sm:px-5">
-        <div className="text-center mb-3 sm:mb-5">
-          <h3 className="text-base sm:text-xl md:text-2xl font-semibold mb-1 sm:mb-2 text-white drop-shadow-[0_4px_16px_rgba(0,0,0,0.6)]">
-            Important Information
-          </h3>
-          <p className="text-[11px] sm:text-xs md:text-sm text-white/90 max-w-xl mx-auto leading-relaxed drop-shadow-[0_3px_12px_rgba(0,0,0,0.7)]">
-            Kindly take note of these details to help the day flow smoothly and beautifully.
+      <div className="relative max-w-6xl mx-auto px-3 sm:px-6 lg:px-8">
+        <div className="relative z-10 text-center mb-10 sm:mb-12 md:mb-16 px-4">
+          <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-5 py-2 text-[10px] sm:text-xs tracking-[0.48em] uppercase text-white">
+            For Marielle
+          </div>
+          <h2
+            className={`${greatVibes.className} text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-white drop-shadow-[0_18px_48px_rgba(8,16,34,0.75)] mt-4`}
+          >
+            Moonlit Masquerade Guide
+          </h2>
+          <p
+            className={`${inter.className} text-xs sm:text-sm md:text-base text-white/80 max-w-2xl mx-auto mt-4 leading-relaxed`}
+          >
+            Step into Marielle&apos;s Moonlit Masquerade. Find the when, where, and how to keep the night graceful, glowing, and right on time.
           </p>
         </div>
 
-        <div className="space-y-3 sm:space-y-4">
-          {/* Attire Guidelines */}
-          <div className="relative rounded-2xl border border-white/40 bg-white/85 backdrop-blur-lg shadow-[0_18px_40px_rgba(61,80,51,0.18)] p-3.5 sm:p-5 overflow-hidden">
-            <div className="mb-2.5 sm:mb-3 relative z-10 text-center">
-              <h4 className="text-[0.75rem] sm:text-sm md:text-base font-semibold tracking-[0.3em] uppercase text-[#3D5033]">
-                Attire &amp; Motif
-              </h4>
-            </div>
 
-            <div className="relative w-full rounded-2xl overflow-hidden border border-white/60 shadow-xl bg-white p-4 sm:p-6 space-y-3 sm:space-y-4">
-              <div className="text-center space-y-2 sm:space-y-3">
-                <p className="text-xs sm:text-sm font-semibold text-[#3D5033]">
-                  Formal attire in shades of green (from light to dark) is lovingly encouraged.
+
+        <div className="grid gap-5 lg:gap-6 lg:grid-cols-[1.1fr_0.9fr] items-stretch mb-12 sm:mb-16 lg:mb-20">
+          <div className="relative overflow-hidden rounded-[28px] sm:rounded-[32px] border border-white/14 bg-white/8 backdrop-blur-2xl shadow-[0_26px_65px_rgba(8,16,34,0.42)]">
+            <div className="relative h-[220px] sm:h-60 md:h-80 lg:h-[420px] xl:h-[460px] overflow-hidden">
+              <Image
+                src="/Details/Roy's Hotel & Convention Center.jpg"
+                alt={venue}
+                fill
+                priority
+                className="object-cover transition-transform duration-[1200ms] group-hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#172822]/95 via-[#172822]/35 to-transparent" />
+              <div className="absolute inset-x-4 bottom-4 sm:bottom-6 text-white">
+                <h3 className="text-xl sm:text-3xl font-serif font-semibold tracking-wide drop-shadow-lg">
+                  Roy&apos;s Hotel & Convention Center
+                </h3>
+                <p className="text-[10px] sm:text-[12px] text-white/80 tracking-[0.24em] uppercase">
+                  Araneta Ave, Tangub, Bacolod
                 </p>
-                <p className="text-xs sm:text-sm text-[#2E3A24]/90">
-                  Please dress within our wedding colors to help create a soft, elegant green celebration.
-                </p>
-              </div>
-
-              <div className="space-y-4">
-                <div className="border-t border-[#F5E5D9] pt-4">
-                  <h5 className="font-semibold text-xs sm:text-sm text-[#3D5033] mb-2">Principal &amp; Peer Sponsors</h5>
-                  <div className="space-y-1.5 sm:space-y-2 text-xs sm:text-sm">
-                    <p className="text-[#2E3A24]">
-                      Ninong: classic black coat. Ninang: graceful dress in a light-green hue.
-                    </p>
-                    <div className="pt-1">
-                      <p className="text-[10px] sm:text-xs font-semibold uppercase tracking-[0.15em] text-[#3D5033] mb-1">
-                        Palette
-                      </p>
-                      <div className="flex flex-wrap gap-1.5">
-                        {sponsorPalette.map((color) => (
-                          <span
-                            key={color}
-                            className="w-7 h-7 rounded-full border border-white/70 shadow-sm"
-                            style={{ backgroundColor: color }}
-                            title={color}
-                          />
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="border-t border-[#F5E5D9] pt-4">
-                  <h5 className="font-semibold text-xs sm:text-sm text-[#3D5033] mb-2">Wedding Guests</h5>
-                  <div className="space-y-1.5 sm:space-y-2 text-xs sm:text-sm">
-                    <p className="text-[#2E3A24]">
-                      Semi-formal or formal attire in shades of green (from light to dark) is warmly encouraged.
-                    </p>
-                    <div className="pt-1">
-                      <p className="text-[10px] sm:text-xs font-semibold uppercase tracking-[0.15em] text-[#3D5033] mb-1">
-                        Palette
-                      </p>
-                      <div className="flex flex-wrap gap-1.5">
-                        {guestPalette.map((color) => (
-                          <span
-                            key={color}
-                            className="w-7 h-7 rounded-full border border-white/70 shadow-sm"
-                            style={{ backgroundColor: color }}
-                            title={color}
-                          />
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="border-t border-[#F5E5D9] pt-4">
-                  <h5 className="font-semibold text-xs sm:text-sm text-[#3D5033] mb-2">Secondary Sponsors &amp; Bridesmaids</h5>
-                  <div className="space-y-1.5 sm:space-y-2 text-xs sm:text-sm">
-                    <p className="text-[#2E3A24]">
-                      Coordinated gowns and attire using elegant green tones from the palette below.
-                    </p>
-                    <div className="pt-1">
-                      <p className="text-[10px] sm:text-xs font-semibold uppercase tracking-[0.15em] text-[#3D5033] mb-1">
-                        Palette
-                      </p>
-                      <div className="flex flex-wrap gap-1.5">
-                        {secondaryPalette.map((color) => (
-                          <span
-                            key={color}
-                            className="w-7 h-7 rounded-full border border-white/70 shadow-sm"
-                            style={{ backgroundColor: color }}
-                            title={color}
-                          />
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                </div>
               </div>
             </div>
 
-            <p className="text-[11px] sm:text-sm text-center mt-2.5 sm:mt-3 text-[#3D5033] font-semibold">
-              Note: We kindly request no all-white dresses, jeans, or shorts.
-            </p>
-          </div>
+            <div className="p-4 sm:p-7 lg:p-8 space-y-4 sm:space-y-6">
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+                <div className="inline-flex justify-center rounded-full border border-white/18 bg-white/10 px-4 py-1.5 text-white/85 text-[9px] sm:text-[11px] tracking-[0.24em] sm:tracking-[0.32em] uppercase whitespace-nowrap">
+                  Wednesday • December 17, 2025 • 6:00 PM
+                </div>
+                  <p className="text-[10px] sm:text-xs text-white/70 tracking-[0.3em] uppercase text-center sm:text-right">
+                    Arrive early to savor the moonlit welcome
+                  </p>
+                </div>
 
-          {/* Arrival Time & Reception Guidelines */}
-          <div className="relative rounded-2xl border border-white/40 bg-white/85 backdrop-blur-lg shadow-[0_18px_40px_rgba(61,80,51,0.18)] p-3.5 sm:p-5 overflow-hidden">
-            <div className="space-y-4 sm:space-y-5">
-              {/* Arrival Time */}
-              <div className="relative w-full rounded-2xl overflow-hidden border border-white/60 shadow-xl bg-white p-4 sm:p-6">
-                <div className="mb-3 sm:mb-4">
-                  <h4 className="text-[0.75rem] sm:text-sm md:text-base font-semibold tracking-[0.3em] uppercase text-[#3D5033] mb-3">
-                    Arrival Time
-                  </h4>
-                  <div className="space-y-2 sm:space-y-2.5">
-                    <p className="text-xs sm:text-sm text-[#2E3A24] leading-relaxed">
-                      Kindly arrive by <span className="font-semibold text-[#3D5033]">10:00 A.M.</span> so we can begin the wedding ceremony promptly at exactly <span className="font-semibold text-[#3D5033]">10:30 A.M.</span>.
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-4">
+                {schedule.map((entry) => (
+                  <div
+                    key={entry.label}
+                    className="rounded-2xl border border-white/18 bg-white/12 px-3.5 py-3 text-center shadow-[0_12px_30px_rgba(12,20,46,0.28)]"
+                  >
+                    <p className="text-[9px] sm:text-[11px] tracking-[0.34em] uppercase text-white/70 mb-1">
+                      {entry.label}
                     </p>
-                    <p className="text-xs sm:text-sm text-[#2E3A24] leading-relaxed">
-                      Your punctuality means so much to us — and don&apos;t forget to have a light snack beforehand so you can enjoy the celebration comfortably!
-                    </p>
+                    <div className="flex items-center justify-center gap-2 text-white text-sm sm:text-base font-semibold">
+                      <Clock className="h-3 w-3 sm:h-3.5 sm:w-3.5" />
+                      <span>{entry.value}</span>
+                    </div>
                   </div>
+                ))}
+              </div>
+
+              <div className="rounded-2xl border border-white/18 bg-white/10 px-4 py-3.5 flex items-start sm:items-center gap-2.5 sm:gap-3 shadow-[0_12px_30px_rgba(12,20,46,0.25)]">
+                <MapPin className="mt-[2px] sm:mt-0 h-4 w-4 sm:h-5 sm:w-5 text-[#7db7ff] flex-shrink-0" />
+                <div className="text-[11px] sm:text-sm text-white/75 leading-relaxed">
+                  <p className="font-semibold text-white">{venue}</p>
+                  <p>{venueAddress}</p>
+                  <p className="mt-1 text-white/70 text-[11px] sm:text-[12px]">⭐️ 4 stars out of 5 — comfort, facilities, and amenities as rated by the property.</p>
                 </div>
               </div>
 
-              {/* Reception Guidelines */}
-              <div className="relative w-full rounded-2xl overflow-hidden border border-white/60 shadow-xl bg-white p-4 sm:p-6">
-                <div className="mb-3 sm:mb-4">
-                  <h4 className="text-[0.75rem] sm:text-sm md:text-base font-semibold tracking-[0.3em] uppercase text-[#660033] mb-3">
-                    Reception Guidelines
-                  </h4>
-                  <div className="space-y-2 sm:space-y-2.5">
-                    <p className="text-xs sm:text-sm text-[#4A2B2B] leading-relaxed">
-                      The seating will be formal, RSVP-style. That's why we're asking you to fill out this invitation form to secure your spot. Kindly do not bring plus ones unless explicitly stated in your invitation.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Travel & Parking - Compact, sage motif */}
-          <div className="relative rounded-2xl border border-[#E0CFB5]/70 bg-[#F0F0EE]/90 backdrop-blur-lg shadow-[0_18px_40px_rgba(61,80,51,0.18)] p-3.5 sm:p-5 overflow-hidden">
-            {/* Header */}
-            <div className="flex items-center justify-center gap-2 mb-2.5 sm:mb-3 relative z-10">
-              <div className="p-1.5 rounded-full shadow-md bg-white/95 border border-[#D1AB6D]/60">
-                <Car className="w-3.5 h-3.5 text-[#525E2C]" />
-              </div>
-              <h4 className="font-semibold text-xs sm:text-base text-[#243127]">Parking &amp; Travel</h4>
-            </div>
-
-            <div className="space-y-3 relative z-10">
-              {/* Parking */}
-              <div className="rounded-xl p-2.5 sm:p-3 border border-[#E0CFB5]/80 bg-gradient-to-br from-white/95 via-[#F0F0EE]/95 to-white/90 shadow-sm">
-                <div className="flex items-start gap-3">
-                  <div className="p-2 rounded-lg bg-[#525E2C]/90 text-[#F0F0EE]">
-                    <Car className="w-4 h-4" />
-                  </div>
-                  <div className="flex-1">
-                    <p className="text-[11px] sm:text-sm font-semibold text-[#243127]">Parking Available</p>
-                    <p className="text-[10px] sm:text-xs text-[#37413A]/85">
-                      Parking is available at the venue. Please arrive early to find a comfortable spot.
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Transportation */}
-              <div className="rounded-xl p-2.5 sm:p-3 border border-[#E0CFB5]/80 bg-gradient-to-br from-white/95 via-[#F0F0EE]/95 to-white/90 shadow-sm">
-                <div className="flex items-start gap-3">
-                  <div className="p-2 rounded-lg bg-[#909E8D]/90 text-[#F0F0EE]">
-                    <Navigation className="w-4 h-4" />
-                  </div>
-                  <div className="flex-1">
-                    <p className="text-[11px] sm:text-sm font-semibold text-[#243127]">Transportation</p>
-                    <p className="text-[10px] sm:text-xs text-[#37413A]/85">
-                      Private vehicles and local transport are welcome. Coordinate with friends or family and plan your
-                      route ahead of time.
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Tips */}
-              <div className="rounded-xl p-2.5 sm:p-3 border border-[#D1AB6D]/75 bg-gradient-to-br from-white/95 via-[#F0F0EE]/95 to-white/90">
-                <p className="text-[11px] sm:text-sm font-semibold mb-2 flex items-center gap-2 text-[#243127]">
-                  <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-[#525E2C]/10 text-[#525E2C]">
-                    <MapPin className="w-3.5 h-3.5" />
+              <div className="flex flex-row gap-2.5 sm:gap-3">
+                <button
+                  onClick={openInMaps}
+                  className="flex-1 inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-[#0f2541] via-[#1e3a67] to-[#7db7ff] px-4 py-3 text-xs sm:text-sm font-semibold text-white transition-all duration-300 hover:-translate-y-1 shadow-[0_14px_36px_rgba(8,16,34,0.45)]"
+                  aria-label="Get directions to the venue"
+                >
+                  <Navigation className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
+                  Get Directions
+                </button>
+                <button
+                  onClick={() => copyToClipboard(venueAddress, "venue")}
+                  className="flex-1 inline-flex items-center justify-center gap-2 rounded-2xl border border-white/20 bg-white/8 px-4 py-3 text-xs sm:text-sm font-semibold text-white/85 shadow-[0_12px_30px_rgba(12,20,48,0.32)] transition-all duration-300 hover:-translate-y-1 hover:border-white/35 hover:text-white"
+                  aria-label="Copy venue address"
+                >
+                  {copiedItems.has("venue") ? (
+                    <Check className="h-4 w-4" />
+                  ) : (
+                    <Copy className="h-4 w-4" />
+                  )}
+                  <span className="hidden sm:inline">
+                    {copiedItems.has("venue") ? "Copied!" : "Copy Address"}
                   </span>
-                  Quick Tips
-                </p>
-                <ul className="text-[10px] sm:text-xs space-y-1 text-[#37413A]/90">
-                  <li className="flex items-start gap-2">
-                    <span className="text-[#525E2C] mt-0.5">•</span>
-                    <span>Plan your route ahead to avoid unexpected delays.</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-[#525E2C] mt-0.5">•</span>
-                    <span>Please avoid walking during the ceremony. Approach the coordinator or wait to be guided.</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-[#525E2C] mt-0.5">•</span>
-                    <span>Coordinate carpooling with friends or family when possible.</span>
-                  </li>
-                </ul>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div className="space-y-5 sm:space-y-6">
+            <div className="rounded-[26px] sm:rounded-[30px] border border-white/18 bg-white/10 backdrop-blur-xl shadow-[0_20px_50px_rgba(8,16,34,0.4)] p-5 sm:p-7 lg:p-8 space-y-3 sm:space-y-4">
+              <div className="flex items-center gap-3">
+                <PartyPopper className="h-6 w-6 text-[#7db7ff]" />
+                <div>
+                  <p className="text-xs sm:text-sm uppercase tracking-[0.38em] text-white/70">Debut Agenda</p>
+                  <h3 className="text-white text-base sm:text-lg font-semibold">Moments to Look Forward To</h3>
+                </div>
+              </div>
+              <ul className="space-y-2.5 text-xs sm:text-sm text-white/75 leading-relaxed">
+                <li className="flex items-start gap-2">
+                  <Sparkles className="mt-1 h-3.5 w-3.5 text-[#7db7ff]" />
+                  18 Moonlit Flowers &amp; 18 Treasures follow the program—bring a short wish or keepsake for Marielle.
+                </li>
+                <li className="flex items-start gap-2">
+                  <Sparkles className="mt-1 h-3.5 w-3.5 text-[#7db7ff]" />
+                  Arrive before call time to sign the guest book and enjoy portraits under the moonlit backdrop.
+                </li>
+                <li className="flex items-start gap-2">
+                  <Sparkles className="mt-1 h-3.5 w-3.5 text-[#7db7ff]" />
+                  Program closes by 9:00 PM so you can travel home safely after the moonlit festivities.
+                </li>
+              </ul>
+            </div>
+
+            <div className="rounded-[26px] sm:rounded-[30px] border border-white/18 bg-white/10 backdrop-blur-xl shadow-[0_20px_50px_rgba(8,16,34,0.4)] p-5 sm:p-7 lg:p-8 space-y-3 sm:space-y-4">
+              <div className="flex items-center gap-3">
+                <Palette className="h-6 w-6 text-[#7db7ff]" />
+                <div>
+                  <p className="text-xs sm:text-sm uppercase tracking-[0.38em] text-white/70">Attire & Palette</p>
+                  <h3 className="text-white text-base sm:text-lg font-semibold">Enchanted Elegance</h3>
+                </div>
+              </div>
+              <ul className="space-y-2 text-xs sm:text-sm text-white/75 leading-relaxed">
+                <li>
+                  Ladies: {siteConfig.dressCode.guests.ladies}.
+                </li>
+                <li>Gentlemen: {siteConfig.dressCode.guests.gentlemen}.</li>
+                <li className="italic text-white/85">{siteConfig.dressCode.note}</li>
+              </ul>
+              <div className="relative w-full rounded-2xl overflow-hidden border border-white/20 shadow-[0_8px_24px_rgba(10,16,34,0.4)]">
+                <Image
+                  src="/Details/debut-attire.png"
+                  alt="Attire Color Palette Guide"
+                  width={800}
+                  height={400}
+                  className="w-full h-auto object-cover"
+                />
+              </div>
+              <p className="text-[11px] sm:text-sm text-white/75">
+                Kindly align outfits with the debut palette below for a cohesive, enchanted look.
+              </p>
+              <div className="flex flex-wrap gap-2.5 sm:gap-3">
+                {colorPalette.map((hex) => (
+                  <span
+                    key={hex}
+                    className="h-10 w-10 sm:h-11 sm:w-11 rounded-full border border-white/25 shadow-[0_6px_16px_rgba(0,0,0,0.35)]"
+                    style={{ backgroundColor: hex }}
+                    aria-label={`Palette color ${hex}`}
+                  />
+                ))}
               </div>
             </div>
           </div>
         </div>
       </div>
-
-      {/* Enhanced Image Modal */}
-      {showImageModal && (
-        <div
-          className="fixed inset-0 backdrop-blur-xl z-50 flex items-center justify-center p-2 sm:p-4 md:p-6 animate-in fade-in duration-500"
-          onClick={() => setShowImageModal(null)}
-          style={{ backgroundColor: "rgba(248, 241, 236, 0.96)" }}
-        >
-          {/* Decorative background elements */}
-          <div className="absolute inset-0 overflow-hidden pointer-events-none">
-            <div
-              className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full blur-3xl animate-pulse"
-              style={{ backgroundColor: "#660033", opacity: 0.12 }}
-            />
-            <div
-              className="absolute bottom-1/4 right-1/4 w-96 h-96 rounded-full blur-3xl animate-pulse"
-              style={{ backgroundColor: "#B76E79", opacity: 0.14, animationDelay: "1s" }}
-            />
-          </div>
-
-          <div
-            className="relative max-w-6xl w-full max-h-[95vh] sm:max-h-[90vh] bg-gradient-to-br from-white via-white rounded-3xl overflow-hidden shadow-2xl border-2 animate-in zoom-in-95 duration-500 group"
-            onClick={(e) => e.stopPropagation()}
-            style={{ borderColor: "#6600331f", backgroundColor: "#FFF8F2" }}
-          >
-            {/* Decorative top accent */}
-            <div
-              className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r"
-              style={{ background: "linear-gradient(to right, #660033, #B76E79, #F5E5D9)" }}
-            />
-
-            {/* Enhanced close button */}
-            <button
-              onClick={() => setShowImageModal(null)}
-              className="absolute top-4 right-4 sm:top-5 sm:right-5 md:top-6 md:right-6 z-20 hover:bg-white backdrop-blur-sm p-2.5 sm:p-3 rounded-xl shadow-xl transition-all duration-300 hover:scale-110 hover:shadow-2xl active:scale-95 border-2 group/close"
-              title="Close (ESC)"
-              style={{ backgroundColor: "#FFF8F2", borderColor: "#66003333", color: "#1a1a1a" }}
-            >
-              <X className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 group-hover/close:text-red-500 transition-colors" />
-            </button>
-
-            {/* Venue badge */}
-            <div className="absolute top-4 left-4 sm:top-5 sm:left-5 md:top-6 md:left-6 z-20">
-              <div
-                className="flex items-center gap-2 backdrop-blur-md px-4 py-2 rounded-full shadow-xl border-2"
-                style={{ backgroundColor: "#FFF8F2", borderColor: "#66003333" }}
-              >
-                {showImageModal === "ceremony" ? (
-                  <>
-                    <Heart className="w-4 h-4" fill="#B76E79" style={{ color: "#660033" }} />
-                    <span className="text-xs sm:text-sm font-bold" style={{ color: "#1a1a1a" }}>
-                      Ceremony Venue
-                    </span>
-                  </>
-                ) : (
-                  <>
-                    <Utensils className="w-4 h-4" style={{ color: "#B76E79" }} />
-                    <span className="text-xs sm:text-sm font-bold" style={{ color: "#1a1a1a" }}>
-                      Reception Venue
-                    </span>
-                  </>
-                )}
-              </div>
-            </div>
-
-            {/* Image section with enhanced effects */}
-            <div
-              className="relative w-full h-[50vh] sm:h-[60vh] md:h-[70vh] overflow-hidden"
-              style={{ backgroundColor: "#FFF8F2" }}
-            >
-              {/* Shimmer effect */}
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12 animate-shimmer opacity-0 group-hover:opacity-100 transition-opacity duration-1000 z-0" />
-
-              <Image
-                src={showImageModal === "ceremony" ? "/Details/RELIGIOUS-Daraga_Church,_Albay.jpg" : "/Details/Hotel St. ellis.jpg"}
-                alt={showImageModal === "ceremony" ? siteConfig.ceremony.location : siteConfig.reception.location}
-                fill
-                className="object-contain p-6 sm:p-8 md:p-10 transition-transform duration-700 group-hover:scale-105 z-10"
-                sizes="95vw"
-                priority
-              />
-            </div>
-
-            {/* Enhanced content section */}
-            <div
-              className="p-5 sm:p-6 md:p-8 bg-gradient-to-br from-white to-white/95 backdrop-blur-sm border-t-2 relative"
-              style={{ borderColor: "#6600331f", backgroundColor: "#FFF8F2" }}
-            >
-              {/* Decorative line */}
-              <div className="absolute top-0 left-8 right-8 h-px bg-gradient-to-r from-transparent via-[#660033]/30 to-transparent" />
-
-              <div className="space-y-5">
-                {/* Header with venue info */}
-                <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
-                  <div className="space-y-2">
-                    <h3
-                      className="text-xl sm:text-2xl md:text-3xl font-bold flex items-center gap-3"
-                      style={{ color: "#1a1a1a" }}
-                    >
-                      {showImageModal === "ceremony" ? (
-                        <Heart className="w-6 h-6" fill="#B76E79" style={{ color: "#660033" }} />
-                      ) : (
-                        <Utensils className="w-6 h-6" style={{ color: "#B76E79" }} />
-                      )}
-                      {showImageModal === "ceremony" ? siteConfig.ceremony.venue : siteConfig.reception.venue}
-                    </h3>
-                    <div className="flex items-center gap-2 text-sm opacity-70" style={{ color: "#1a1a1a" }}>
-                      <MapPin className="w-4 h-4" style={{ color: "#660033" }} />
-                      <span>
-                        {showImageModal === "ceremony"
-                          ? siteConfig.ceremony.location
-                          : siteConfig.reception.location}
-                      </span>
-                    </div>
-
-                    {/* Date & Time info */}
-                    {showImageModal === "ceremony" && (
-                      <div
-                        className="flex items-center gap-2 text-sm font-medium px-3 py-2 rounded-lg border"
-                        style={{
-                          color: "#1a1a1a",
-                          backgroundColor: "#F5E5D9",
-                          opacity: 0.9,
-                          borderColor: "#66003333",
-                        }}
-                      >
-                        <Clock className="w-4 h-4" style={{ color: "#660033" }} />
-                        <span>
-                          {siteConfig.ceremony.date} at {siteConfig.ceremony.time}
-                        </span>
-                      </div>
-                    )}
-                    {showImageModal === "reception" && (
-                      <div
-                        className="flex items-center gap-2 text-sm font-medium px-3 py-2 rounded-lg border"
-                        style={{
-                          color: "#1a1a1a",
-                          backgroundColor: "#FDECEF",
-                          opacity: 0.9,
-                          borderColor: "#B76E7933",
-                        }}
-                      >
-                        <Clock className="w-4 h-4" style={{ color: "#B76E79" }} />
-                        <span>
-                          {siteConfig.reception.date} - {siteConfig.reception.time}
-                        </span>
-                      </div>
-                    )}
-                  </div>
-
-                  {/* Action buttons */}
-                  <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 sm:gap-3">
-                    <button
-                      onClick={() =>
-                        copyToClipboard(
-                          showImageModal === "ceremony"
-                            ? siteConfig.ceremony.location
-                            : siteConfig.reception.location,
-                          `modal-${showImageModal}`,
-                        )
-                      }
-                      className="flex items-center justify-center gap-2 px-4 py-2.5 sm:px-5 sm:py-3 bg-white border-2 rounded-xl font-semibold text-sm transition-all duration-300 hover:scale-105 hover:shadow-lg active:scale-95 shadow-md hover:bg-[#F5E5D9]/25 whitespace-nowrap"
-                      title="Copy address"
-                      style={{ borderColor: "#66003333", color: "#1a1a1a" }}
-                    >
-                      {copiedItems.has(`modal-${showImageModal}`) ? (
-                        <>
-                          <Check className="w-4 h-4" />
-                          <span>Copied!</span>
-                        </>
-                      ) : (
-                        <>
-                          <Copy className="w-4 h-4" />
-                          <span>Copy Address</span>
-                        </>
-                      )}
-                    </button>
-
-                    <button
-                      onClick={() =>
-                        openInMaps(showImageModal === "ceremony" ? ceremonyMapsLink : receptionMapsLink)
-                      }
-                      className="flex items-center justify-center gap-2 px-5 py-3 rounded-xl font-semibold text-sm transition-all duration-300 hover:scale-105 hover:shadow-xl active:scale-95 shadow-lg whitespace-nowrap text-white"
-                      style={{
-                        background:
-                          showImageModal === "ceremony"
-                            ? "linear-gradient(to right, #660033, #B76E79)"
-                            : "linear-gradient(to right, #B76E79, #F5E5D9)",
-                      }}
-                    >
-                      <Navigation className="w-4 h-4 sm:w-5 sm:h-5" />
-                      <span>Get Directions</span>
-                    </button>
-                  </div>
-                </div>
-
-                {/* Additional info */}
-                <div className="flex items-center gap-2 text-xs opacity-65" style={{ color: "#1a1a1a" }}>
-                  <span className="flex items-center gap-1.5">
-                    <Camera className="w-3 h-3" />
-                    Click outside to close
-                  </span>
-                  <span className="hidden sm:inline">•</span>
-                  <span className="hidden sm:inline-flex items-center gap-1.5">Press ESC to close</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
     </Section>
   )
 }
-
-

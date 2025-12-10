@@ -223,18 +223,8 @@ export function Entourage() {
     <section
       ref={sectionRef}
       id="entourage"
-      className="relative py-12 md:py-16 lg:py-20 overflow-hidden bg-[#525E2C]"
+      className="relative py-12 md:py-16 lg:py-20 overflow-hidden bg-transparent"
     >
-      {/* Background elements matching the narrative section's sage motif */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        {/* Vertical sage gradients to frame the entourage */}
-        <div className="absolute top-0 left-0 w-full h-1/3 bg-gradient-to-b from-[#3D4636]/92 via-[#525E2C]/78 to-transparent" />
-        <div className="absolute bottom-0 left-0 w-full h-1/3 bg-gradient-to-t from-[#3D4636]/95 via-[#525E2C]/72 to-transparent" />
-        {/* Soft radial light in warm neutrals */}
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(224,207,181,0.28),transparent_55%)] opacity-90" />
-        {/* Subtle diagonal wash of muted sage */}
-        <div className="absolute inset-0 bg-gradient-to-br from-[#6E7A61]/24 via-transparent to-[#E0CFB5]/12 mix-blend-soft-light" />
-      </div>
 
       {/* Section Header */}
       <div className={`relative z-30 text-center mb-6 sm:mb-9 md:mb-12 px-3 sm:px-4 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-10'}`}>
@@ -243,14 +233,14 @@ export function Entourage() {
           className={`${cormorant.className} text-[0.7rem] sm:text-xs md:text-sm uppercase tracking-[0.28em] text-white mb-2`}
           style={{ textShadow: "0 2px 10px rgba(0,0,0,0.8)" }}
         >
-          Those who stand with Marzan &amp; Nica
+          Moonlight Masquerade
         </p>
 
         <h2
           className="style-script-regular text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-white mb-1.5 sm:mb-3 md:mb-4"
           style={{ textShadow: "0 4px 18px rgba(0,0,0,0.9)" }}
         >
-          Wedding Entourage
+          Marielle&apos;s Enchanted Soiree
         </h2>
 
         {/* Simple divider */}

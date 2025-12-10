@@ -75,7 +75,7 @@ His patience is not just a comfort Nica relies on; it is his quiet, powerful pro
     secondary: "#8FB99A",
   },
   snapShare: {
-    googleDriveLink: "https://drive.google.com/drive/folders/1ijmtWwZEOUUZaip6kj8Pr6B61cBxF_PZ?usp=sharing",
+    googleDriveLink: "https://drive.google.com/drive/folders/1Dl4bXaRCc9Nb7eBKLs89kmYpmGdefq5l?usp=sharing",
     instructions: "Please scan this QR Code, create a folder with your name and upload the photos and videos you have taken during our wedding reception. We are delighted to see your snaps too!",
   },
 }
