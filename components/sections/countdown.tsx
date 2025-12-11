@@ -304,7 +304,7 @@ export function Countdown() {
                     <div className="flex flex-1 items-center justify-end gap-1.5 sm:gap-2.5">
                       <span className="h-[0.5px] flex-1 bg-white/35" />
                       <span className="text-[0.6rem] sm:text-[0.7rem] md:text-xs uppercase tracking-[0.3em] sm:tracking-[0.4em] font-light">
-                        Sat
+                        Wed
                       </span>
                       <span className="h-[0.5px] w-6 sm:w-8 md:w-10 bg-white/35" />
                     </div>

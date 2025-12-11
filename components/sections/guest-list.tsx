@@ -434,7 +434,7 @@ export function GuestList() {
                       </h3>
                     </div>
                     <p className="text-white/95 text-[10px] sm:text-xs md:text-sm lg:text-base xl:text-lg font-sans leading-tight sm:leading-normal">
-                      Hello <span className="font-extrabold text-[#FFFFFF] drop-shadow-[0_1px_6px_rgba(102,105,86,0.55)]">{selectedGuest?.Name}</span>, you are invited to our wedding!
+                      Hello <span className="font-extrabold text-[#FFFFFF] drop-shadow-[0_1px_6px_rgba(102,105,86,0.55)]">{selectedGuest?.Name}</span>, you are invited to Marielle's debut celebration!
                     </p>
                   </div>
                   {!hasResponded && (
@@ -460,7 +460,7 @@ export function GuestList() {
                       Thank You for Responding!
                     </h4>
                     <p className="text-[#909E8D] text-[10px] sm:text-xs md:text-sm mb-2 sm:mb-3 md:mb-4 px-2">
-                      We've received your RSVP and look forward to celebrating with you!
+                      We've received your RSVP and look forward to celebrating Marielle's debut with you!
                     </p>
                     <div className="bg-[#F0F0EE]/40 rounded-lg p-2.5 sm:p-3 md:p-4 border border-[#E0CFB5]/70 space-y-2 sm:space-y-2.5 md:space-y-3">
                       <div className="flex items-center justify-center gap-1.5 sm:gap-2 md:gap-3 mb-1.5 sm:mb-2">
@@ -581,14 +581,14 @@ export function GuestList() {
                     <div>
                     <label className="flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm font-semibold text-[#243127] mb-1.5 sm:mb-2 font-sans flex-wrap">
                       <MessageSquare className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-[#909E8D] flex-shrink-0" />
-                        <span>Your Message to the Couple</span>
+                        <span>Your Message to Marielle</span>
                       <span className="text-[10px] sm:text-xs font-normal text-[#909E8D]">(Optional)</span>
                       </label>
                       <textarea
                         name="Message"
                         value={formData.Message}
                         onChange={handleFormChange}
-                        placeholder="Share your excitement..."
+                        placeholder="Share your well wishes for Marielle..."
                         rows={3}
                       className="w-full px-2.5 sm:px-3 py-1.5 sm:py-2 border-2 border-[#E0CFB5]/60 focus:border-[#006495] rounded-lg text-xs sm:text-sm font-sans text-[#243127] placeholder:text-[#909E8D]/70 transition-all duration-300 focus:ring-2 focus:ring-[#006495]/20 resize-none bg-white"
                       />
@@ -659,7 +659,7 @@ export function GuestList() {
                     {formData.RSVP === "Yes" && (
                       <div className="space-y-1 sm:space-y-1.5 mb-2 sm:mb-3">
                         <p className="text-white/95 text-xs sm:text-sm font-medium">
-                          We're thrilled you'll be joining us!
+                          We're thrilled you'll be joining us for Marielle's debut!
                         </p>
                         <p className="text-white/80 text-[10px] sm:text-xs">
                           Your response has been recorded
@@ -722,9 +722,9 @@ export function GuestList() {
                     </div>
                     <p className="text-white/95 text-[10px] sm:text-xs md:text-sm lg:text-base font-sans leading-tight sm:leading-normal">
                       {requestFormData.Name ? (
-                        <>Hi <span className="font-extrabold text-[#FFFFFF] drop-shadow-[0_1px_6px_rgba(102,105,86,0.55)]">{requestFormData.Name}</span> — want to celebrate with us? Send a request!</>
+                        <>Hi <span className="font-extrabold text-[#FFFFFF] drop-shadow-[0_1px_6px_rgba(102,105,86,0.55)]">{requestFormData.Name}</span> — want to celebrate Marielle's debut with us? Send a request!</>
                       ) : (
-                        <>Want to celebrate with us? Send a request!</>
+                        <>Want to celebrate Marielle's debut with us? Send a request!</>
                       )}
                     </p>
                   </div>
@@ -826,7 +826,7 @@ export function GuestList() {
                       name="Message"
                       value={requestFormData.Message}
                       onChange={(e) => setRequestFormData({ ...requestFormData, Message: e.target.value })}
-                      placeholder="Share why you'd like to join..."
+                      placeholder="Share why you'd like to join Marielle's celebration..."
                       rows={3}
                         className="w-full px-2.5 sm:px-3 py-1.5 sm:py-2 border-2 border-[#E0CFB5]/60 focus:border-[#006495] rounded-lg text-xs sm:text-sm font-sans text-[#243127] placeholder:text-[#909E8D]/70 transition-all duration-300 focus:ring-2 focus:ring-[#006495]/20 resize-none bg-white"
                     />
